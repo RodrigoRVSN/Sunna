@@ -6,9 +6,12 @@ export const ButtonContainer = styled(RectButton)`
   background: ${(props) => props.theme.colors.secondary30};
   align-items: center;
   justify-content: center;
-  width: 250px;
+  width: 100%;
+  min-width: 250px;
+  max-width: 400px;
   height: 60px;
   border-radius: 15px;
+  padding: 0 10px;
 `;
 
 export const Title = styled.Text`

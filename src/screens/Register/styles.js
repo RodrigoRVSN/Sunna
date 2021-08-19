@@ -9,7 +9,7 @@ export const HomeContainer = styled.View`
 
 export const Title = styled.Text`
   text-align: center;
-  font-size: 30px;
+  font-size: 16px;
   color: ${(props) => props.theme.colors.heading};
   margin-bottom: 60px;
 `;

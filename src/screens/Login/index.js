@@ -70,11 +70,11 @@ export default function Login() {
                 <ErrorMessage error={error} />
 
                 <TouchableOpacity onPress={() => handleLoginSubmit()}>
-                  <Button title="LOGIN" />
+                  <Button title="Entrar" />
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => handleGoogleSignIn()}>
-                  <Button title="ENTRAR" />
+                  <Button title="Entrar com o Google" />
                 </TouchableOpacity>
 
                 {/* <Button title="ENTRAR" onPress={handleLoginSubmit} />

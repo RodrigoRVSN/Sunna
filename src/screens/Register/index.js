@@ -62,11 +62,11 @@ export default function Register() {
               <ErrorMessage error={error} />
 
               <TouchableOpacity onPress={() => handleRegisterSubmit()}>
-                <Button title="REGISTRAR" />
+                <Button title="Registrar" />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => handleGoogleSignIn()}>
-                <Button title="GOOGLE" />
+                <Button title="Entrar com o Google" />
               </TouchableOpacity>
 
               {/* <Button title="REGISTRAR" onPress={handleRegisterSubmit} />

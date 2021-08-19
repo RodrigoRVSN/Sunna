@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BackHandler, Button, TouchableOpacity } from 'react-native';
+import { BackHandler, TouchableOpacity } from 'react-native';
 import { HomeContainer, Title, ToSignOut } from './styles';
 import { useAuth } from '../../hooks/useAuth';
 import Background from '../../components/Background';
@@ -8,6 +8,7 @@ import { Header } from '../../components/Header';
 // import { Chart } from '../../components/Chart';
 import { schedulePushNotification } from '../../service/schedulePushNotification';
 import { sendPushNotification } from '../../service/sendPushNotifaction';
+import Button from '../../components/Button';
 
 export default function Home() {
   const {
@@ -26,20 +27,20 @@ export default function Home() {
       <HomeContainer>
         <Title>{userApp?.email}</Title>
         <Button
-          title="Press to schedule a notification"
+          title="local notif."
           onPress={async () => {
             await schedulePushNotification();
           }}
         />
         <Button
-          title="Press to schedule a notification"
+          title="remote notif."
           onPress={async () => {
             await sendPushNotification(expoToken);
           }}
         />
 
         <TouchableOpacity onPress={() => handleSignOut()}>
-          <ToSignOut>Sair :D.</ToSignOut>
+          <Button title="Sair" />
         </TouchableOpacity>
 
       </HomeContainer>

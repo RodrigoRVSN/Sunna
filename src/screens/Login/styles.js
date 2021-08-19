@@ -8,7 +8,7 @@ export const HomeContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 12px;
+  font-size: 16px;
   color: ${(props) => props.theme.colors.heading};
   margin-bottom: 30px;
 `;
