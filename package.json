@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^6.0.6",
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
+    "expo-av": "~9.2.3",
     "expo-constants": "~11.0.1",
     "expo-google-app-auth": "^8.2.2",
     "expo-google-sign-in": "~9.2.1",

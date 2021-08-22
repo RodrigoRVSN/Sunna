@@ -1,12 +1,18 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { ButtonContainer, Title } from './styles';
 
-export default function Button({ title, ...rest }) {
+export default function Button({ title, disabled, onPress }) {
   return (
     <>
-      <ButtonContainer {...rest}>
-        <Title>{title}</Title>
-      </ButtonContainer>
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={onPress}
+      >
+        <ButtonContainer>
+          <Title>{title}</Title>
+        </ButtonContainer>
+      </TouchableOpacity>
     </>
   );
 }

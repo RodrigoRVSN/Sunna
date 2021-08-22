@@ -8,7 +8,7 @@ export const ButtonContainer = styled(RectButton)`
   justify-content: center;
   width: 100%;
   min-width: 250px;
-  max-width: 400px;
+  max-width: 350px;
   height: 60px;
   border-radius: 15px;
   padding: 0 10px;

@@ -61,16 +61,9 @@ export default function Register() {
               />
               <ErrorMessage error={error} />
 
-              <TouchableOpacity onPress={() => handleRegisterSubmit()}>
-                <Button title="Registrar" />
-              </TouchableOpacity>
+              <Button title="Registrar" onPress={() => handleRegisterSubmit()} />
 
-              <TouchableOpacity onPress={() => handleGoogleSignIn()}>
-                <Button title="Entrar com o Google" />
-              </TouchableOpacity>
-
-              {/* <Button title="REGISTRAR" onPress={handleRegisterSubmit} />
-              <Button title="LOGIN" onPress={handleGoogleSignIn} /> */}
+              <Button title="Entrar com o Google" onPress={() => handleGoogleSignIn()} />
 
               <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                 <ToLogin>Já possui uma conta? Clique aqui.</ToLogin>

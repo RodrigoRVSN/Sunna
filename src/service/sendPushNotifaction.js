@@ -1,6 +1,5 @@
 export async function sendPushNotification(expoPushToken) {
   /* Remoto (API) */
-  console.log(expoPushToken);
   const message = {
     to: expoPushToken,
     sound: 'default',

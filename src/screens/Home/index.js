@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BackHandler, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { BackHandler } from 'react-native';
 import { HomeContainer, Title, ToSignOut } from './styles';
 import { useAuth } from '../../hooks/useAuth';
 import Background from '../../components/Background';
@@ -9,12 +9,18 @@ import { Header } from '../../components/Header';
 import { schedulePushNotification } from '../../service/schedulePushNotification';
 import { sendPushNotification } from '../../service/sendPushNotifaction';
 import Button from '../../components/Button';
+import { handleSound } from '../../utils/handleSound';
+
+const lightsOff = require('../../assets/audio/lightsOff.mp3');
+const lightsOn = require('../../assets/audio/lightsOn.mp3');
 
 export default function Home() {
   const {
     userApp, handleSignOut, expoToken,
   } = useAuth();
   const { backAction } = BackAction();
+  const [lightsState, setLightsState] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backAction);
@@ -27,6 +33,11 @@ export default function Home() {
       <HomeContainer>
         <Title>{userApp?.email}</Title>
         <Button
+          onPress={() => handleSound(setPlaying, lightsState, setLightsState, lightsOn, lightsOff)}
+          disabled={playing}
+          title={lightsState ? 'Apagar luzes' : 'Acender Luzes'}
+        />
+        <Button
           title="local notif."
           onPress={async () => {
             await schedulePushNotification();
@@ -38,10 +49,10 @@ export default function Home() {
             await sendPushNotification(expoToken);
           }}
         />
-
-        <TouchableOpacity onPress={() => handleSignOut()}>
-          <Button title="Sair" />
-        </TouchableOpacity>
+        <Button
+          onPress={() => handleSignOut()}
+          title="Sair"
+        />
 
       </HomeContainer>
     </Background>
