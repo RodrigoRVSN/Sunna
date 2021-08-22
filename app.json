@@ -13,20 +13,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.rodrigorvsn.app"
     },
     "android": {
-      "googleServicesFile": "./.google-services.json",
+      "package": "com.rodrigorvsn.app",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.rodrigorvsn.app"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

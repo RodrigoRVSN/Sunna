@@ -3,12 +3,12 @@ import React, {
   useRef,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import * as Google from 'expo-google-app-auth';
+import * as GoogleAuthentication from 'expo-google-app-auth';
+import firebase from 'firebase';
 import { useNavigation } from '@react-navigation/core';
 import { Alert } from 'react-native';
 import * as Notifications from 'expo-notifications';
-import { db, firebase } from '../config/firebase';
+import { db } from '../config/firebase';
 import { config } from '../config/google';
 import { registerForPushNotificationsAsync } from '../service/registerForPushNotificationsAsync';
 
@@ -43,6 +43,7 @@ function AuthProvider({ children }) {
   /* Gera o token */
   useEffect(() => {
     if (userApp) {
+      console.log(userApp);
       registerForPushNotificationsAsync(userApp).then((token) => setExpoToken(token));
       notificationListener.current = Notifications.addNotificationReceivedListener((notif) => {
         setNotification(notif);
@@ -64,7 +65,7 @@ function AuthProvider({ children }) {
     const { accessToken } = userApp;
 
     if (accessToken) {
-      await Google.logOutAsync({ accessToken, ...config })
+      await GoogleAuthentication.logOutAsync({ accessToken, ...config })
         .then(async () => {
           setUserApp({});
           await AsyncStorage.removeItem('@app:user');
@@ -94,11 +95,25 @@ function AuthProvider({ children }) {
   }
 
   /* Logar com o google */
-  async function handleGoogleSignIn() {
+  const handleGoogleSignIn = () => {
     setLoading(true);
-    await Google.logInAsync(config)
-      .then(async (result) => {
-        const { type, user } = result;
+    GoogleAuthentication.logInAsync(config)
+      .then(async (logInResult) => {
+        if (logInResult.type === 'success') {
+          const { idToken, accessToken, user } = logInResult;
+          const credential = firebase.auth.GoogleAuthProvider.credential(
+            idToken,
+            accessToken,
+          );
+          await AsyncStorage.setItem('@app:user', JSON.stringify(user));
+          setUserApp(user);
+
+          firebase.auth().signInWithCredential(credential);
+          navigation.navigate('Home');
+        } else {
+          return Promise.reject();
+        }
+        /* const { type, user } = result;
         if (type === 'success') {
           await AsyncStorage.setItem('@app:user', JSON.stringify(user));
           setUserApp(user);
@@ -106,15 +121,15 @@ function AuthProvider({ children }) {
           navigation.navigate('Home');
         } else {
           Alert('Login cancelado');
-        }
+        } */
       })
       .catch((error) => {
-        Alert(`Falha ao realizar login! ${error}`);
+        console.log(`Falha ao realizar login! ${error}`);
       })
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
 
   return (
     <AuthContext.Provider value={{

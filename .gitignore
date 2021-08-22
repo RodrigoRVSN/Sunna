@@ -16,8 +16,5 @@ web-build/
 
 .env
 
-*.plist
-.google-services.json
-.project
-.settings/
-
+/google-services.json
+/GoogleService-Info.plist

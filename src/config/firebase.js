@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/firebase-firestore';
 import 'firebase/auth';
+/* import 'firebase/analytics'; */
 
 import {
   FIREBASE_API_KEY,
@@ -9,7 +10,16 @@ import {
   FIREBASE_STORAGE_BUCKET,
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_APP_ID,
+  FIREBASE_MEASUREMENT_ID,
 } from '@env';
+
+console.log(FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+  FIREBASE_MEASUREMENT_ID);
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -18,10 +28,12 @@ const firebaseConfig = {
   storageBucket: FIREBASE_STORAGE_BUCKET,
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
   appId: FIREBASE_APP_ID,
+  measurementId: FIREBASE_MEASUREMENT_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
+/* firebase.analytics(); */
 
 export { firebase, auth, db };
