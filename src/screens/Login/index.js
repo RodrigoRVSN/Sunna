@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
+
   KeyboardAvoidingView, Platform, TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -54,6 +55,7 @@ export default function Login() {
         <Background>
           {loading ? <Loading />
             : (
+
               <HomeContainer>
 
                 <Title>Entre em sua conta!</Title>

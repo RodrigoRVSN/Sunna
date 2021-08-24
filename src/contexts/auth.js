@@ -43,7 +43,6 @@ function AuthProvider({ children }) {
   /* Gera o token */
   useEffect(() => {
     if (userApp) {
-      console.log(userApp);
       registerForPushNotificationsAsync(userApp).then((token) => setExpoToken(token));
       notificationListener.current = Notifications.addNotificationReceivedListener((notif) => {
         setNotification(notif);
@@ -108,20 +107,14 @@ function AuthProvider({ children }) {
           await AsyncStorage.setItem('@app:user', JSON.stringify(user));
           setUserApp(user);
 
+          await db.collection('usersToken').doc(`${userApp.email}`).set({
+            email: userApp.email,
+            expoToken,
+          });
+
           firebase.auth().signInWithCredential(credential);
           navigation.navigate('Home');
-        } else {
-          return Promise.reject();
         }
-        /* const { type, user } = result;
-        if (type === 'success') {
-          await AsyncStorage.setItem('@app:user', JSON.stringify(user));
-          setUserApp(user);
-
-          navigation.navigate('Home');
-        } else {
-          Alert('Login cancelado');
-        } */
       })
       .catch((error) => {
         console.log(`Falha ao realizar login! ${error}`);
