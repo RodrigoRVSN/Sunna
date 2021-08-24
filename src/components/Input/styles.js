@@ -12,7 +12,7 @@ export const InputContainer = styled(TextInput)`
   margin-top: 15px;
   text-align: center;
   border-width: 1px;
-  background: ${(props) => props.theme.colors.secondary30};
-  color: ${(props) => props.theme.colors.secondary100};
-  border-color: ${(props) => props.theme.colors.secondary30};
+  background: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.primaryDark};
+  border-color: ${(props) => props.theme.colors.primaryMedium};
 `;

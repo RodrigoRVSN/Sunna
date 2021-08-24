@@ -9,12 +9,12 @@ export const HomeContainer = styled.View`
 
 export const Title = styled.Text`
   font-size: 16px;
-  color: ${(props) => props.theme.colors.heading};
+  color: ${(props) => props.theme.colors.white};
   margin-bottom: 30px;
 `;
 
 export const ToRegister = styled.Text`
-  color: ${(props) => props.theme.colors.heading};
+  color: ${(props) => props.theme.colors.white};
   margin-top: 15px;
 `;
 

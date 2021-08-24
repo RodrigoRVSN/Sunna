@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
 
@@ -25,6 +25,8 @@ export default function Login() {
   const [error, setError] = useState('');
 
   const navigation = useNavigation();
+
+  useEffect(() => { setError(''); }, []);
 
   async function handleLoginSubmit() {
     setLoading(true);

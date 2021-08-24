@@ -10,12 +10,12 @@ export const HomeContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: ${(props) => props.theme.colors.heading};
+  color: ${(props) => props.theme.colors.white};
   font-size: 12px;
 `;
 
 export const ToSignOut = styled.Text`
-  color: ${(props) => props.theme.colors.heading};
-  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.primaryLight};
   margin: 60px 0;
 `;

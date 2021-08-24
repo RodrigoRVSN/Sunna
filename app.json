@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "Sunna",
+    "slug": "Sunna",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "scheme": "sunna",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0D1321"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,7 +24,7 @@
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#0D1321"
       }
     },
     "web": {

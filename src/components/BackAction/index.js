@@ -16,7 +16,7 @@ export default function BackAction() {
         },
         {
           text: 'SIM',
-          onPress: () => handleSignOut,
+          onPress: () => handleSignOut(),
         },
       ],
     );

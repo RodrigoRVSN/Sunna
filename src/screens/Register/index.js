@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Background from '../../components/Background';
@@ -19,6 +19,10 @@ export default function Register() {
   const { handleGoogleSignIn, loading, setLoading } = useAuth();
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    setError('');
+  }, []);
 
   async function handleRegisterSubmit() {
     setLoading(true);

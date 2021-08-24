@@ -1,12 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { Animated } from 'react-native';
-import { Container } from './styles';
+import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 
 export default function Background({ children }) {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const { primaryDark, background } = theme.colors;
+
+  /* const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeIn = () => {
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
@@ -30,13 +33,16 @@ export default function Background({ children }) {
     setTimeout(() => {
       fadeIn();
     }, 2000);
-  }, []);
+  }, []); */
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <LinearGradient
+        style={styles.container}
+        colors={[background, primaryDark]}
+      >
         {children}
-      </Container>
+      </LinearGradient>
     </ThemeProvider>
   );
 }

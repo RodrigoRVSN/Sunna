@@ -11,10 +11,13 @@ const { Navigator, Screen } = createStackNavigator();
 export default function AppRoutes() {
   const { userApp } = useAuth();
   return (
-    <Navigator screenOptions={{
-      headerShown: false,
-      cardStyle: { backgroundColor: theme.colors.secondary100 },
-    }}
+    <Navigator
+      detachInactiveScreens={false}
+      screenOptions={{
+        headerShown: false,
+        cardStyle: { backgroundColor: theme.colors.secondary100 },
+        animationEnabled: false,
+      }}
     >
       {userApp?.email ? (
         <Screen name="Home" component={Home} />

@@ -10,12 +10,12 @@ export const HomeContainer = styled.View`
 export const Title = styled.Text`
   text-align: center;
   font-size: 16px;
-  color: ${(props) => props.theme.colors.heading};
+  color: ${(props) => props.theme.colors.white};
   margin-bottom: 60px;
 `;
 
 export const ToLogin = styled.Text`
-  color: ${(props) => props.theme.colors.heading};
+  color: ${(props) => props.theme.colors.white};
   margin-top: 15px;
 `;
 

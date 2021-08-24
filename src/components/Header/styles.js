@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     fontSize: 20,
-    color: theme.colors.heading,
+    color: theme.colors.white,
   },
   tinyLogo: {
     width: 50,
@@ -26,11 +26,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: theme.colors.secondary30,
-    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primaryLight,
+    backgroundColor: theme.colors.white,
   },
   letterProfile: {
-    color: theme.colors.secondary85,
+    color: theme.colors.primaryDark,
     fontSize: 25,
     textTransform: 'uppercase',
   },

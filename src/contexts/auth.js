@@ -107,10 +107,12 @@ function AuthProvider({ children }) {
           await AsyncStorage.setItem('@app:user', JSON.stringify(user));
           setUserApp(user);
 
-          await db.collection('usersToken').doc(`${userApp.email}`).set({
-            email: userApp.email,
-            expoToken,
-          });
+          if (userApp.email) {
+            await db.collection('usersToken').doc(`${userApp.email}`).set({
+              email: userApp.email,
+              expoToken,
+            });
+          }
 
           firebase.auth().signInWithCredential(credential);
           navigation.navigate('Home');

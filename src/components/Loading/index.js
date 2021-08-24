@@ -7,7 +7,7 @@ export function Loading() {
   return (
     <>
       <View style={styles.container}>
-        <ActivityIndicator size="large" color={theme.colors.secondary30} />
+        <ActivityIndicator size="large" color={theme.colors.primaryLight} />
       </View>
     </>
   );

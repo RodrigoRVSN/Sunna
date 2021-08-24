@@ -9,7 +9,7 @@ import { theme } from '../../global/styles/theme';
 import { useAuth } from '../../hooks/useAuth';
 
 export function Header({ title }) {
-  const { secondary100, secondary40, heading } = theme.colors;
+  const { primaryDark, background, white } = theme.colors;
   const { userApp } = useAuth();
 
   const navigation = useNavigation();
@@ -21,10 +21,10 @@ export function Header({ title }) {
   return (
     <LinearGradient
       style={styles.container}
-      colors={[secondary100, secondary40]}
+      colors={[primaryDark, background]}
     >
       <BorderlessButton onPress={handleGoBack}>
-        <Feather name="arrow-left" size={24} color={heading} />
+        <Feather name="arrow-left" size={24} color={white} />
       </BorderlessButton>
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity style={styles.tinyLogo}>
