@@ -1,10 +1,11 @@
 import React from 'react';
-import { InputContainer } from './styles';
+import { InputContainer, InputText, Label } from './styles';
 
-export default function Input({ ...rest }) {
+export default function Input({ title, ...rest }) {
   return (
-    <>
-      <InputContainer {...rest} autoCapitalize="none" />
-    </>
+    <InputContainer>
+      <Label>{title}</Label>
+      <InputText {...rest} autoCapitalize="none" />
+    </InputContainer>
   );
 }

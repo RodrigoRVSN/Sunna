@@ -7,10 +7,11 @@ import Input from '../../components/Input';
 import { firebase } from '../../config/firebase';
 import ErrorMessage from '../../components/ErrorMessage';
 import {
-  styles, HomeContainer, Title, ToLogin,
+  HomeContainer, Title, ToLogin, styles, ImageLogo,
 } from './styles';
 import { useAuth } from '../../hooks/useAuth';
 import { Loading } from '../../components/Loading';
+import ButtonGoogle from '../../components/ButtonGoogle';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -47,27 +48,29 @@ export default function Register() {
         {loading ? <Loading />
           : (
             <HomeContainer>
+              <ImageLogo
+                source={require('../../assets/images/sunnaIcon.png')}
+              />
               <Title>
-                Seja bem-vindo!
-                {'\n'}
-                {' '}
-                Crie sua conta.
+                REGISTRE
               </Title>
               <Input
+                title="E-MAIL"
                 placeholder="email@gmail.com"
                 onChangeText={setEmail}
                 keyboardType="email-address"
               />
               <Input
+                title="SENHA"
                 placeholder="********"
                 secureTextEntry
                 onChangeText={setPassword}
               />
               <ErrorMessage error={error} />
 
-              <Button title="Registrar" onPress={() => handleRegisterSubmit()} />
+              <Button title="REGISTRAR" onPress={() => handleRegisterSubmit()} />
 
-              <Button title="Entrar com o Google" onPress={() => handleGoogleSignIn()} />
+              <ButtonGoogle title="Entrar com o Google" onPress={() => handleGoogleSignIn()} />
 
               <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                 <ToLogin>Já possui uma conta? Clique aqui.</ToLogin>

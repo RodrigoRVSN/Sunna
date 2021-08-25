@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import { Animated } from 'react-native';
-import { styles } from './styles';
+import { BackgroundContainer } from './styles';
 import { theme } from '../../global/styles/theme';
 
 export default function Background({ children }) {
@@ -37,12 +36,11 @@ export default function Background({ children }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <LinearGradient
-        style={styles.container}
+      <BackgroundContainer
         colors={[background, primaryDark]}
       >
         {children}
-      </LinearGradient>
+      </BackgroundContainer>
     </ThemeProvider>
   );
 }

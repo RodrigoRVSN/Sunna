@@ -25,7 +25,7 @@ export async function schedulePushNotification() {
   Notifications.cancelAllScheduledNotificationsAsync();
 }
 cancelNotifications(); */
-
+/*
 const trigger = new Date(Date.now() + 1000 * 60 * 40);
 trigger.setMinutes(0);
 trigger.setSeconds(0);
@@ -36,3 +36,4 @@ Notifications.scheduleNotificationAsync({
   },
   trigger,
 });
+ */

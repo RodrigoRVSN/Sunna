@@ -1,11 +1,9 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components';
 
-export const styles = StyleSheet.create({
-  message: {
-    color: '#e63946',
-    fontSize: 15,
-    marginTop: 10,
-    paddingHorizontal: 10,
-    textAlign: 'center',
-  },
-});
+export const ErrorMessageContainer = styled.Text`
+    color: #e63946;
+    font-size: 15px;
+    margin-top: 10px;
+    padding: 10px 0;
+    text-align: center;
+`;

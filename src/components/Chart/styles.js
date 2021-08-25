@@ -1,15 +1,17 @@
-import { StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
-export const styles = StyleSheet.create({
-  container: {
-    height: 350,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5fcff',
-    margin: 20,
-    borderRadius: 20,
-  },
-  scrollView: {
-    paddingHorizontal: 20,
-  },
-});
+import styled from 'styled-components/native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+export const ChartContainer = styled(View)`
+    height: 350px;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5fcff;
+    margin: 20px;
+    border-radius: 20px;
+`;
+
+export const ScrollViewContainer = styled(ScrollView)`
+    padding: 0 20px;
+`;

@@ -1,10 +1,10 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
-import { Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from './styles';
+import {
+  HeaderContainer, ImageProfile, LetterProfile, TinyLogo, Title,
+} from './styles';
 import { theme } from '../../global/styles/theme';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -19,20 +19,19 @@ export function Header({ title }) {
   }
 
   return (
-    <LinearGradient
-      style={styles.container}
+    <HeaderContainer
       colors={[primaryDark, background]}
     >
       <BorderlessButton onPress={handleGoBack}>
         <Feather name="arrow-left" size={24} color={white} />
       </BorderlessButton>
-      <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity style={styles.tinyLogo}>
+      <Title>{title}</Title>
+      <TinyLogo>
         {userApp?.photoUrl
-          ? (<Image style={styles.imageProfile} source={{ uri: userApp?.photoUrl }} />)
-          : (<Text style={styles.letterProfile}>{userApp?.email?.slice(0, 1)}</Text>)}
-      </TouchableOpacity>
+          ? (<ImageProfile source={{ uri: userApp?.photoUrl }} />)
+          : (<LetterProfile>{userApp?.email?.slice(0, 1)}</LetterProfile>)}
+      </TinyLogo>
 
-    </LinearGradient>
+    </HeaderContainer>
   );
 }

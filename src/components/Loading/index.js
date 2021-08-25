@@ -1,14 +1,14 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { theme } from '../../global/styles/theme';
-import { styles } from './styles';
+import { LoadingContainer } from './styles';
 
 export function Loading() {
   return (
     <>
-      <View style={styles.container}>
+      <LoadingContainer>
         <ActivityIndicator size="large" color={theme.colors.primaryLight} />
-      </View>
+      </LoadingContainer>
     </>
   );
 }

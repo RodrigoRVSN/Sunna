@@ -1,8 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
-import { styles } from './styles';
+import { ChartContainer, ScrollViewContainer } from './styles';
 
 const data = [
   { quarter: 1, earnings: 130 },
@@ -16,8 +14,8 @@ const data = [
 export function Chart() {
   return (
     <>
-      <View style={styles.container}>
-        <ScrollView horizontal style={styles.scrollView}>
+      <ChartContainer>
+        <ScrollViewContainer horizontal>
           <VictoryChart
             width={100 * data.length}
             theme={VictoryTheme.material}
@@ -25,8 +23,8 @@ export function Chart() {
           >
             <VictoryBar data={data} x="quarter" y="earnings" />
           </VictoryChart>
-        </ScrollView>
-      </View>
+        </ScrollViewContainer>
+      </ChartContainer>
     </>
   );
 }

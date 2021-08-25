@@ -4,12 +4,26 @@ import { Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
-export const InputContainer = styled(TextInput)`
-  width: ${windowWidth * 0.8}px;
+export const InputContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  margin-top: 15.7px;
+`;
+
+export const Label = styled.Text`
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.white};
+  text-align: left;
+`;
+
+export const InputText = styled(TextInput).attrs((props) => ({
+  placeholderTextColor: props.theme.colors.background,
+}))`
+  width: ${windowWidth * 0.75}px;
   height: 60px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin-top: 15px;
+  border-radius: 44px;
+  font-size: 14px;
+  margin-top: 6px;
   text-align: center;
   border-width: 1px;
   background: ${(props) => props.theme.colors.white};

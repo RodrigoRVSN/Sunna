@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
-
   KeyboardAvoidingView, Platform, TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,9 +11,10 @@ import ErrorMessage from '../../components/ErrorMessage';
 import { firebase } from '../../config/firebase';
 import { useAuth } from '../../hooks/useAuth';
 import {
-  HomeContainer, Title, ToRegister, styles,
+  HomeContainer, Title, ToRegister, styles, ImageLogo,
 } from './styles';
 import { Loading } from '../../components/Loading';
+import ButtonGoogle from '../../components/ButtonGoogle';
 
 export default function Login() {
   const {
@@ -59,14 +59,18 @@ export default function Login() {
             : (
 
               <HomeContainer>
-
-                <Title>Entre em sua conta!</Title>
+                <ImageLogo
+                  source={require('../../assets/images/sunnaIcon.png')}
+                />
+                <Title>ENTRE</Title>
                 <Input
+                  title="E-MAIL"
                   placeholder="email@gmail.com"
                   onChangeText={setEmail}
                   keyboardType="email-address"
                 />
                 <Input
+                  title="SENHA"
                   placeholder="********"
                   secureTextEntry
                   onChangeText={setPassword}
@@ -74,11 +78,11 @@ export default function Login() {
                 <ErrorMessage error={error} />
 
                 <Button
-                  title="Entrar"
+                  title="ENTRAR"
                   onPress={() => handleLoginSubmit()}
                 />
 
-                <Button
+                <ButtonGoogle
                   title="Entrar com o Google"
                   onPress={() => handleGoogleSignIn()}
                 />

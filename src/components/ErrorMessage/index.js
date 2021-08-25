@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { styles } from './styles';
+import { ErrorMessageContainer } from './styles';
 
 export default function ErrorMessage({ error }) {
   return (
     <>
-      <Text style={styles.message}>{error}</Text>
+      <ErrorMessageContainer>{error}</ErrorMessageContainer>
     </>
   );
 }
