@@ -12,19 +12,19 @@ const App = () => {
   ]);
   return (
 
-    <Background>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
+    <NavigationContainer ref={navigationRef}>
+      <AuthProvider independent>
+        <Background>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="transparent"
+            translucent
+          />
 
-      <NavigationContainer ref={navigationRef}>
-        <AuthProvider independent>
           <Routes />
-        </AuthProvider>
-      </NavigationContainer>
-    </Background>
+        </Background>
+      </AuthProvider>
+    </NavigationContainer>
   );
 };
 

@@ -15,6 +15,7 @@ import {
 } from './styles';
 import { Loading } from '../../components/Loading';
 import ButtonGoogle from '../../components/ButtonGoogle';
+import { Fade } from '../../hooks/animations/fade';
 
 export default function Login() {
   const {
@@ -23,10 +24,14 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { fadeAnim, fadeIn } = Fade();
 
   const navigation = useNavigation();
 
-  useEffect(() => { setError(''); }, []);
+  useEffect(() => {
+    setError('');
+    fadeIn();
+  }, []);
 
   async function handleLoginSubmit() {
     setLoading(true);
@@ -58,14 +63,16 @@ export default function Login() {
           {loading ? <Loading />
             : (
 
-              <HomeContainer>
+              <HomeContainer style={{ opacity: fadeAnim }}>
+
                 <ImageLogo
                   source={require('../../assets/images/sunnaIcon.png')}
                 />
+
                 <Title>ENTRE</Title>
                 <Input
                   title="E-MAIL"
-                  placeholder="email@gmail.com"
+                  placeholder="nome@mail.com"
                   onChangeText={setEmail}
                   keyboardType="email-address"
                 />

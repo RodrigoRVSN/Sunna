@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
-export const HomeContainer = styled.View`
+export const HomeContainer = styled(Animated.View)`
   flex: 1;
   align-items: center;
   justify-content: center;

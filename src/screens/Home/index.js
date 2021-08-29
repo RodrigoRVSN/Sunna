@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BackHandler } from 'react-native';
-import { HomeContainer, Title, ToSignOut } from './styles';
+import { HomeContainer, Title } from './styles';
 import { useAuth } from '../../hooks/useAuth';
 import Background from '../../components/Background';
 import BackAction from '../../components/BackAction';
@@ -10,6 +10,7 @@ import { schedulePushNotification } from '../../service/schedulePushNotification
 import { sendPushNotification } from '../../service/sendPushNotifaction';
 import Button from '../../components/Button';
 import { handleSound } from '../../utils/handleSound';
+import { Fade } from '../../hooks/animations/fade';
 
 const lightsOff = require('../../assets/audio/lightsOff.mp3');
 const lightsOn = require('../../assets/audio/lightsOn.mp3');
@@ -21,8 +22,10 @@ export default function Home() {
   const { backAction } = BackAction();
   const [lightsState, setLightsState] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const { fadeAnim, fadeIn } = Fade();
 
   useEffect(() => {
+    fadeIn();
     BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
@@ -30,7 +33,7 @@ export default function Home() {
   return (
     <Background>
       <Header title="Início" />
-      <HomeContainer>
+      <HomeContainer style={{ opacity: fadeAnim }}>
         <Title>{userApp?.email}</Title>
         <Button
           onPress={() => handleSound(setPlaying, lightsState, setLightsState, lightsOn, lightsOff)}
