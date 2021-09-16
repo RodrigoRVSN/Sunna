@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "484954453664",
+    "project_id": "proud-limiter-323718",
+    "storage_bucket": "proud-limiter-323718.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484954453664:android:f397699c1ef975c84bfbc5",
+        "android_client_info": {
+          "package_name": "com.rodrigorvsn.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484954453664-p6hnj5bqiorc47n5aigcc16eqcg5lhp8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rodrigorvsn.app",
+            "certificate_hash": "738ee0d102fa75360daa0ebef05d4d28e17667be"
+          }
+        },
+        {
+          "client_id": "484954453664-rt1jsh7d3ufbu1sopok35vl3s32jonoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAtAy9qLIgAhXHbbQ0UtDiQfZV1Lr7TKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484954453664-rt1jsh7d3ufbu1sopok35vl3s32jonoj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "484954453664-6kljkg248nbak35rmi1offpeeourln4p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rodrigorvsn.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
