@@ -7,21 +7,21 @@ import { AuthProvider } from './src/contexts/auth';
 
 // import {navigationRef} from './src/utils/navigationRef';
 
-const App = () => {
+const App = (): JSX.Element => {
   LogBox.ignoreLogs(['Setting a timer']);
   return (
     <NavigationContainer>
       <AuthProvider>
-      <Background>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
-          translucent
-        />
+        <Background>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="transparent"
+            translucent
+          />
 
           <Routes />
-      </Background>
-        </AuthProvider>
+        </Background>
+      </AuthProvider>
     </NavigationContainer>
   );
 };

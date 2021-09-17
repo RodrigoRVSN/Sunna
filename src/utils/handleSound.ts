@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction} from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Audio, AVPlaybackNativeSource } from 'expo-av';
 
 const sound = new Audio.Sound();
@@ -17,7 +17,7 @@ export async function handleSound({
   setActionState,
   audioOn,
   audioOff,
-}: Props) {
+}: Props): Promise<() => void> {
   setPlaying(true);
   setActionState(!actionState);
   try {

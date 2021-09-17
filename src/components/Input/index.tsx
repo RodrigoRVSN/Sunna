@@ -6,7 +6,7 @@ interface Props extends TextInputProps {
   title: string;
 }
 
-export default function Input({ title, ...rest }: Props) {
+export default function Input({ title, ...rest }: Props): JSX.Element {
   return (
     <InputContainer>
       <Label>{title}</Label>

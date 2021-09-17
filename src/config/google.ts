@@ -1,8 +1,4 @@
-
-import {
-  GOOGLE_ANDROID_CLIENT_ID,
-  GOOGLE_IOS_CLIENT_ID,
-} from '@env';
+import { GOOGLE_ANDROID_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from '@env';
 
 export const config = {
   androidClientId: `${GOOGLE_ANDROID_CLIENT_ID}`,

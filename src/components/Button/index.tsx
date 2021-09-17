@@ -8,7 +8,11 @@ type ButtonProps = {
   onPress: () => void;
 };
 
-export default function Button({ title, disabled, onPress }: ButtonProps) {
+export default function Button({
+  title,
+  disabled,
+  onPress,
+}: ButtonProps): JSX.Element {
   return (
     <>
       <TouchableOpacity disabled={disabled} onPress={onPress}>

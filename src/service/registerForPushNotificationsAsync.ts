@@ -5,7 +5,9 @@ import Constants from 'expo-constants';
 import { database } from '../config/firebase';
 import { User } from '../contexts/auth';
 
-export async function registerForPushNotificationsAsync(userApp: User) {
+export async function registerForPushNotificationsAsync(
+  userApp: User,
+): Promise<string | undefined> {
   let token;
   if (Constants.isDevice) {
     /* Pedir permissões */
@@ -35,7 +37,7 @@ export async function registerForPushNotificationsAsync(userApp: User) {
   alert('Must use physical device for Push Notifications');
 
   if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
+    void Notifications.setNotificationChannelAsync('default', {
       name: 'default',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],

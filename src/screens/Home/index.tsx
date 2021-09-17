@@ -15,7 +15,7 @@ import { Fade } from '../../hooks/animations/fade';
 import audioOff from '../../assets/audio/lightsOff.mp3';
 import audioOn from '../../assets/audio/lightsOn.mp3';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const { userApp, handleSignOut, expoToken } = useAuth();
   const { backAction } = BackAction();
   const [actionState, setActionState] = useState<boolean>(false);
@@ -32,10 +32,16 @@ export default function Home() {
       BackHandler.removeEventListener('hardwareBackPress', backAction);
       isMounted = false;
     };
-  }, []);
+  }, [backAction, fadeIn]);
 
   function callHandleSound() {
-    handleSound({ setPlaying, actionState, setActionState, audioOn, audioOff });
+    void handleSound({
+      setPlaying,
+      actionState,
+      setActionState,
+      audioOn,
+      audioOff,
+    });
   }
 
   return (
@@ -57,7 +63,7 @@ export default function Home() {
         <Button
           title="remote notif."
           onPress={async () => {
-            await sendPushNotification(expoToken as string);
+            await sendPushNotification(expoToken);
           }}
         />
         <Button onPress={() => handleSignOut()} title="Sair" />

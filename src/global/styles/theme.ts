@@ -1,4 +1,14 @@
-export const theme = {
+type Props = {
+  colors: {
+    white: string;
+    background: string;
+    primaryDark: string;
+    primaryMedium: string;
+    primaryLight: string;
+  };
+};
+
+export const theme: Props = {
   colors: {
     white: '#F0E8D8',
     background: '#0D1321',

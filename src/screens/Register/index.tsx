@@ -12,7 +12,7 @@ import { Loading } from '../../components/Loading';
 import ButtonGoogle from '../../components/ButtonGoogle';
 import { Fade } from '../../hooks/animations/fade';
 
-export default function Register() {
+export default function Register(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -33,7 +33,7 @@ export default function Register() {
       .createUserWithEmailAndPassword(email, password)
       .then(() => navigation.navigate('Login'))
       .catch(err => {
-        setError(err.message);
+        setError((err as Error).message);
       })
       .finally(() => {
         setLoading(false);

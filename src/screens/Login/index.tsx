@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableOpacity,
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Background from '../../components/Background';
 import Button from '../../components/Button';
@@ -19,7 +14,7 @@ import ButtonGoogle from '../../components/ButtonGoogle';
 import { Fade } from '../../hooks/animations/fade';
 import { User } from '../../contexts/auth';
 
-export default function Login() {
+export default function Login(): JSX.Element {
   const { setUserApp, handleGoogleSignIn, loading, setLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +26,7 @@ export default function Login() {
   useEffect(() => {
     setError('');
     fadeIn();
-  }, []);
+  }, [fadeIn]);
 
   async function handleLoginSubmit() {
     setLoading(true);
@@ -45,7 +40,7 @@ export default function Login() {
         navigation.navigate('Home');
       })
       .catch(err => {
-        setError(err.message);
+        setError((err as Error).message);
       })
       .finally(() => {
         setLoading(false);

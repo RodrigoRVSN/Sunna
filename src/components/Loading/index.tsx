@@ -3,7 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { theme } from '../../global/styles/theme';
 import { LoadingContainer } from './styles';
 
-export function Loading() {
+export function Loading(): JSX.Element {
   return (
     <>
       <LoadingContainer>

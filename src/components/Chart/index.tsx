@@ -11,7 +11,7 @@ const data = [
   { quarter: 6, earnings: 190 },
 ];
 
-export function Chart() {
+export function Chart(): JSX.Element {
   return (
     <>
       <ChartContainer>

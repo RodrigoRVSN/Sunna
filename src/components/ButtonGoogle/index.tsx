@@ -12,7 +12,7 @@ export default function ButtonGoogle({
   title,
   disabled,
   onPress,
-}: ButtonGoogleProps) {
+}: ButtonGoogleProps): JSX.Element {
   return (
     <>
       <TouchableOpacity disabled={disabled} onPress={onPress}>

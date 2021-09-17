@@ -1,4 +1,6 @@
-export async function sendPushNotification(expoPushToken: string) {
+export async function sendPushNotification(
+  expoPushToken: string,
+): Promise<void> {
   /* Remoto (API) */
   const message = {
     to: expoPushToken,

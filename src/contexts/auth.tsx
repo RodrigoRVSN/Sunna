@@ -15,12 +15,6 @@ import * as Notifications from 'expo-notifications';
 import { database } from '../config/firebase';
 import { config } from '../config/google';
 import { registerForPushNotificationsAsync } from '../service/registerForPushNotificationsAsync';
-import { RouteProp } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
-
-interface ProfileScreenRouteProp {
-  navigation: any;
-}
 
 export type User = {
   email: string;
@@ -28,15 +22,15 @@ export type User = {
   photoUrl?: string;
 };
 
-type AuthContextData = {
+export type AuthContextData = {
   userApp: User;
   setUserApp: Dispatch<SetStateAction<User>>;
   handleSignOut: () => void;
   handleGoogleSignIn: () => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
-  expoToken: String;
-  setExpoToken: Dispatch<SetStateAction<String>>;
+  expoToken: string;
+  setExpoToken: Dispatch<SetStateAction<string>>;
 };
 
 type AuthProviderProps = {
@@ -45,25 +39,25 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-function AuthProvider({ children }: AuthProviderProps) {
+function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [userApp, setUserApp] = useState<User>({} as User);
 
   const navigation = useNavigation<any>();
   const [loading, setLoading] = useState(false);
-  const [expoToken, setExpoToken] = useState<String>('' as String);
+  const [expoToken, setExpoToken] = useState<string>('' as string);
 
   /* Carrega informações do usuário salvas */
   async function loadUserStorageData() {
     const storage = await AsyncStorage.getItem('@app:user');
     if (storage) {
-      const userLogged = JSON.parse(storage);
+      const userLogged = JSON.parse(storage) as User;
       setUserApp(userLogged);
     }
   }
 
   /* Chama a função de carregar as informações */
   useEffect(() => {
-    loadUserStorageData();
+    void loadUserStorageData();
   }, []);
 
   /* Notificações */
@@ -74,7 +68,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   /* Gera o token */
   useEffect(() => {
     if (userApp) {
-      registerForPushNotificationsAsync(userApp).then(token =>
+      void registerForPushNotificationsAsync(userApp).then(token =>
         setExpoToken(token as string),
       );
       notificationListener.current =
@@ -89,9 +83,9 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
     return () => {
       Notifications.removeNotificationSubscription(
-        notificationListener.current!,
+        notificationListener.current,
       );
-      Notifications.removeNotificationSubscription(responseListener.current!);
+      Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, [userApp]);
 
@@ -107,7 +101,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           await AsyncStorage.removeItem('@app:user');
         })
         .catch(error =>
-          console.log(`Falha ao sair da conta do google: ${error}`),
+          console.log(`Falha ao sair da conta do google: ${error as string}`),
         )
         .finally(() => {
           setLoading(false);
@@ -122,7 +116,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         await AsyncStorage.removeItem('@app:user');
       })
       .catch(error =>
-        console.log(`Falha ao sair da conta do firebase: ${error}`),
+        console.log(`Falha ao sair da conta do firebase: ${error as string}`),
       )
       .finally(() => {
         setLoading(false);
@@ -154,12 +148,12 @@ function AuthProvider({ children }: AuthProviderProps) {
               });
           }
 
-          firebase.auth().signInWithCredential(credential);
+          void firebase.auth().signInWithCredential(credential);
           navigation.navigate('Home');
         }
       })
       .catch(error => {
-        console.log(`Falha ao realizar login! ${error}`);
+        console.log(`Falha ao realizar login! ${error as string}`);
       })
       .finally(() => {
         setLoading(false);

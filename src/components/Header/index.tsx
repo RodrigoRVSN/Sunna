@@ -10,13 +10,13 @@ import {
   Title,
 } from './styles';
 import { theme } from '../../global/styles/theme';
-import useAuth from "../../hooks/useAuth";
+import useAuth from '../../hooks/useAuth';
 
 type Props = {
   title: string;
 };
 
-export function Header({ title }: Props) {
+export function Header({ title }: Props): JSX.Element {
   const { primaryDark, background, white } = theme.colors;
   const { userApp } = useAuth();
 

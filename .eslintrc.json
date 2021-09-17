@@ -5,13 +5,16 @@
         "node": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
-    ],
+        "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
+      ],
     "parser": "@typescript-eslint/parser",
-    "parserOptions": {
+    /* "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
@@ -19,18 +22,18 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
     
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint" , "prettier",
-        "react-native"
-    ],
+    }, */
+    
+  "plugins": ["react", "react-hooks","prettier"],
     "rules": {
       "prettier/prettier": "error",
+      "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
         "space-before-function-paren": "off",
         "react/prop-types": "off",
         "@typescript-eslint/no-use-before-define": "off",
         "no-use-before-define": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
+        "no-unsafe-assignment": "off",
+        "no-unsafe-finally": "off",
+        "no-unsafe-call": "off"
     }
 }

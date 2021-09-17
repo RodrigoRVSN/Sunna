@@ -1,7 +1,11 @@
 import { Alert } from 'react-native';
 import useAuth from '../../hooks/useAuth';
 
-export default function BackAction() {
+type Props = {
+  backAction: () => boolean;
+};
+
+export default function BackAction(): Props {
   const { handleSignOut } = useAuth();
 
   const backAction = () => {
