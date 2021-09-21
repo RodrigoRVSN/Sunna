@@ -31,6 +31,18 @@
       "favicon": "./assets/favicon.png"
     },
     "description": "UPXFour",
-    "githubUrl": "https://github.com/RodrigoRVSN/upx_app/tree/appBranch"
+    "githubUrl": "https://github.com/RodrigoRVSN/upx_app/tree/appBranch", 
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/path/to/myNotificationIcon.png",
+          "color": "#ffffff",
+          "sounds": ["./local/path/to/mySound.wav", "./local/path/to/myOtherSound.wav"],
+          "mode": "production"
+        }
+      ]
+    ]
+  
   }
 }
