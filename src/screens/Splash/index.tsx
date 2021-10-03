@@ -59,7 +59,7 @@ export function Splash() {
   return (
     <Container>
       <Animated.View style={[brandStyle, { position: 'absolute' }]}>
-        <BrandSvg width={200} height={200} />
+        <BrandSvg width={250} height={250} />
       </Animated.View>
     </Container>
   );
