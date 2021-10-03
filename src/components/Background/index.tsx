@@ -1,21 +1,28 @@
 import React, { ReactNode } from 'react';
-import { ThemeProvider } from 'styled-components';
 
 import { BackgroundContainer } from './styles';
-import theme from '../../global/styles/theme';
+import { useTheme } from 'styled-components';
+import { StatusBar } from 'react-native';
 
 type Props = {
   children: ReactNode;
 };
 
 export default function Background({ children }: Props): JSX.Element {
-  const { primaryDark, background } = theme.colors;
+  const theme = useTheme();
 
   return (
-    <ThemeProvider theme={theme}>
-      <BackgroundContainer colors={[background, primaryDark]}>
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
+
+      <BackgroundContainer
+        colors={[theme.colors.background, theme.colors.primaryDark]}>
         {children}
       </BackgroundContainer>
-    </ThemeProvider>
+    </>
   );
 }

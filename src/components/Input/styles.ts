@@ -1,18 +1,18 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { TextInput } from 'react-native-gesture-handler';
-import { Dimensions, Text, View } from 'react-native';
+import { Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
-export const InputContainer = styled(View)`
+export const InputContainer = styled.View`
   display: flex;
   flex-direction: column;
   margin-top: 15.7px;
 `;
 
-export const Label = styled(Text)`
+export const Label = styled.Text`
   font-size: 14px;
-  color: ${props => props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   text-align: left;
 `;
 
@@ -26,7 +26,7 @@ export const InputText = styled(TextInput).attrs(props => ({
   margin-top: 6px;
   text-align: center;
   border-width: 1px;
-  background: ${props => props.theme.colors.white};
-  color: ${props => props.theme.colors.primaryDark};
-  border-color: ${props => props.theme.colors.primaryMedium};
+  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.primaryDark};
+  border-color: ${({ theme }) => theme.colors.primaryMedium};
 `;

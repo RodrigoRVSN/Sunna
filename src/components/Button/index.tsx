@@ -1,25 +1,27 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { RectButtonProps } from 'react-native-gesture-handler';
+import { Loading } from '../Loading';
 import { ButtonContainer, Title } from './styles';
 
-type ButtonProps = {
+interface ButtonProps extends RectButtonProps {
   title: string;
+  onPress?: () => void;
   disabled?: boolean;
-  onPress: () => void;
-};
+  loading?: boolean;
+}
 
 export default function Button({
   title,
-  disabled,
+  disabled = false,
   onPress,
+  loading = false,
+  ...rest
 }: ButtonProps): JSX.Element {
   return (
     <>
-      <TouchableOpacity disabled={disabled} onPress={onPress}>
-        <ButtonContainer>
-          <Title>{title}</Title>
-        </ButtonContainer>
-      </TouchableOpacity>
+      <ButtonContainer enabled={!disabled || loading} onPress={onPress} {...rest}>
+        <Title>{loading ? <Loading /> : title}</Title>
+      </ButtonContainer>
     </>
   );
 }

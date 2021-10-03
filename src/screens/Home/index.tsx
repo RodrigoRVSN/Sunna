@@ -10,7 +10,6 @@ import { schedulePushNotification } from '../../service/schedulePushNotification
 import { sendPushNotification } from '../../service/sendPushNotifaction';
 import Button from '../../components/Button';
 import { handleSound } from '../../utils/handleSound';
-import { Fade } from '../../hooks/animations/fade';
 
 import audioOff from '../../assets/audio/lightsOff.mp3';
 import audioOn from '../../assets/audio/lightsOn.mp3';
@@ -20,19 +19,15 @@ export default function Home(): JSX.Element {
   const { backAction } = BackAction();
   const [actionState, setActionState] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
-  const { fadeAnim, fadeIn } = Fade();
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted) {
-      fadeIn();
-    }
     BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', backAction);
       isMounted = false;
     };
-  }, [backAction, fadeIn]);
+  }, [backAction]);
 
   function callHandleSound() {
     void handleSound({
@@ -47,7 +42,7 @@ export default function Home(): JSX.Element {
   return (
     <Background>
       <Header title="Início" />
-      <HomeContainer style={{ opacity: fadeAnim }}>
+      <HomeContainer >
         <Title>{userApp?.email}</Title>
         <Button
           onPress={callHandleSound}

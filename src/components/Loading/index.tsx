@@ -1,13 +1,15 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
-import { theme } from '../../global/styles/theme';
+import { useTheme } from 'styled-components';
 import { LoadingContainer } from './styles';
 
 export function Loading(): JSX.Element {
+  const theme = useTheme();
+
   return (
     <>
       <LoadingContainer>
-        <ActivityIndicator size="large" color={theme.colors.primaryLight} />
+        <ActivityIndicator size="large" color={theme.colors.white} />
       </LoadingContainer>
     </>
   );

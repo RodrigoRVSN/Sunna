@@ -1,7 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Image, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 export const HeaderContainer = styled(LinearGradient)`
   width: 100%;
@@ -21,26 +20,26 @@ export const TinyLogo = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   border-width: 2px;
-  border-color: ${props => props.theme.colors.primaryLight};
-  background-color: ${props => props.theme.colors.white};
+  border-color: ${({theme}) => theme.colors.primaryLight};
+  background-color: ${({theme}) => theme.colors.white};
   color: #e63946;
   font-size: 15px;
 `;
-export const ImageProfile = styled(Image)`
+export const ImageProfile = styled.Image`
   width: 100%;
   height: 100%;
   border-radius: 25px;
 `;
 
-export const Title = styled(Text)`
+export const Title = styled.Text`
   flex: 1;
   text-align: center;
   font-size: 20px;
-  color: ${props => props.theme.colors.white};
+  color: ${({theme}) => theme.colors.white};
 `;
 
-export const LetterProfile = styled(Text)`
-  color: ${props => props.theme.colors.primaryDark};
+export const LetterProfile = styled.Text`
+  color: ${({theme}) => theme.colors.primaryDark};
   font-size: 25px;
   text-transform: uppercase;
 `;

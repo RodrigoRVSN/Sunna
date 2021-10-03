@@ -93,7 +93,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   async function handleSignOut() {
     setLoading(true);
     const { accessToken } = userApp;
-
+    console.log('oi')
     if (accessToken) {
       await GoogleAuthentication.logOutAsync({ accessToken, ...config })
         .then(async () => {
