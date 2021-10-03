@@ -14,6 +14,7 @@ export const ButtonContainer = styled(RectButton)`
   border-radius: 44px;
   padding: 0 10px;
   
+  opacity: ${({ enabled }) => (enabled ? 1 : 0.5)};
 `;
 
 export const Title = styled.Text`

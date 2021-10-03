@@ -31,6 +31,7 @@ export type AuthContextData = {
   setLoading: (loading: boolean) => void;
   expoToken: string;
   setExpoToken: Dispatch<SetStateAction<string>>;
+  loadUserStorageData: () => void;
 };
 
 type AuthProviderProps = {
@@ -52,7 +53,10 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     if (storage) {
       const userLogged = JSON.parse(storage) as User;
       setUserApp(userLogged);
+      navigation.navigate('Home');
+      return;
     }
+    navigation.navigate('Login');
   }
 
   /* Chama a função de carregar as informações */
@@ -93,7 +97,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   async function handleSignOut() {
     setLoading(true);
     const { accessToken } = userApp;
-    console.log('oi')
+
     if (accessToken) {
       await GoogleAuthentication.logOutAsync({ accessToken, ...config })
         .then(async () => {
@@ -122,7 +126,13 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         setLoading(false);
       });
 
-    await database.collection('usersToken').doc(`${userApp.email}`).delete();
+    await database
+      .collection('usersToken')
+      .doc(`${userApp.email}`)
+      .delete()
+      .then(() => {
+        navigation.navigate('Login');
+      });
   }
 
   /* Logar com o google */
@@ -170,6 +180,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         setLoading,
         expoToken,
         setExpoToken,
+        loadUserStorageData,
       }}>
       {children}
     </AuthContext.Provider>

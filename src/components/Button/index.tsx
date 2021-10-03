@@ -19,7 +19,10 @@ export default function Button({
 }: ButtonProps): JSX.Element {
   return (
     <>
-      <ButtonContainer enabled={!disabled || loading} onPress={onPress} {...rest}>
+      <ButtonContainer
+        enabled={!disabled && !loading}
+        onPress={onPress}
+        {...rest}>
         <Title>{loading ? <Loading /> : title}</Title>
       </ButtonContainer>
     </>

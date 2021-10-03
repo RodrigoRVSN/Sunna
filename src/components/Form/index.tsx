@@ -95,6 +95,7 @@ export default function Form({ title, type, action }: Props) {
       />
 
       <ButtonGoogle
+        loading={loading}
         title="Entrar com o Google"
         onPress={() => handleGoogleSignIn()}
       />

@@ -2,13 +2,13 @@ import * as Notifications from 'expo-notifications';
 
 /* Local */
 
-/* Notifications.setNotificationHandler({
+Notifications.setNotificationHandler({
   handleNotification: () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: true,
   }),
-}); */
+});
 
 export async function schedulePushNotification(): Promise<void> {
   await Notifications.scheduleNotificationAsync({

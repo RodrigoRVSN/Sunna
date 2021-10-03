@@ -7,7 +7,7 @@ import { HomeContainer, styles, ToRegister } from './styles';
 
 export default function Login(): JSX.Element {
   const navigation = useNavigation<any>();
-
+  
   return (
     <>
       <KeyboardAvoidingView

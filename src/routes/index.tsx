@@ -1,16 +1,27 @@
 import React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 
 import AppRoutes from './app.routes';
 import { AuthProvider } from '../contexts/auth';
+import { View } from 'react-native';
 
 export default function Routes() {
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: '#0D1321',
+    },
+  };
+
   return (
-    <NavigationContainer independent>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </NavigationContainer>
+    <View style={{ flex: 1 }}>
+      <NavigationContainer independent theme={theme}>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </NavigationContainer>
+    </View>
   );
 }

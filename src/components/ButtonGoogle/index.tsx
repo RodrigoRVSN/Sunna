@@ -1,26 +1,30 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { Image } from 'react-native';
 import { ButtonContainer, Title } from './styles';
+import { RectButtonProps } from 'react-native-gesture-handler';
+import { Loading } from '../Loading';
 
-type ButtonGoogleProps = {
+interface ButtonGoogleProps extends RectButtonProps {
   title: string;
   disabled?: boolean;
+  loading?: boolean;
   onPress: () => void;
-};
+}
 
 export default function ButtonGoogle({
   title,
-  disabled,
+  disabled = false,
+  loading = false,
   onPress,
 }: ButtonGoogleProps): JSX.Element {
   return (
     <>
-      <TouchableOpacity disabled={disabled} onPress={onPress}>
-        <ButtonContainer>
-          <Image source={require('../../assets/images/googleIcon.png')} />
-          <Title>{title}</Title>
-        </ButtonContainer>
-      </TouchableOpacity>
+      <ButtonContainer
+        enabled={!loading && !disabled}
+        onPress={onPress}>
+        <Image source={require('../../assets/images/googleIcon.png')} />
+        <Title>{loading ? <Loading /> : title}</Title>
+      </ButtonContainer>
     </>
   );
 }
