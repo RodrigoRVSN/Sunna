@@ -48,12 +48,15 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
   /* Carrega informações do usuário salvas */
   async function loadUserStorageData() {
+    setLoading(true);
     const storage = await AsyncStorage.getItem('@app:user');
     if (storage) {
       const userLogged = JSON.parse(storage) as User;
       setUserApp(userLogged);
+      setLoading(false);
       return;
     }
+    setLoading(false);
   }
 
   /* Chama a função de carregar as informações */

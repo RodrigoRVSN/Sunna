@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/stack';
 
 import Home from '../screens/Home';
-import { Splash } from '../screens/Splash';
 
 const { Navigator, Screen } = createStackNavigator();
 
