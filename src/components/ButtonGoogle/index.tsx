@@ -19,9 +19,7 @@ export default function ButtonGoogle({
 }: ButtonGoogleProps): JSX.Element {
   return (
     <>
-      <ButtonContainer
-        enabled={!loading && !disabled}
-        onPress={onPress}>
+      <ButtonContainer enabled={!loading && !disabled} onPress={onPress}>
         <Image source={require('../../assets/images/googleIcon.png')} />
         <Title>{loading ? <Loading /> : title}</Title>
       </ButtonContainer>

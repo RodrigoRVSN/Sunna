@@ -6,9 +6,10 @@ export const Container = styled.ScrollView.attrs({
   contentContainerStyle: {
     alignItems: 'center',
     paddingVertical: 30,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
-})``;
+})`
+`;
 
 export const ImageLogo = styled.Image`
   width: ${RFValue(160)}px;

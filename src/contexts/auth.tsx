@@ -10,11 +10,11 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as GoogleAuthentication from 'expo-google-app-auth';
 import firebase from 'firebase';
-import { useNavigation } from '@react-navigation/native';
 import * as Notifications from 'expo-notifications';
 import { database } from '../config/firebase';
 import { config } from '../config/google';
 import { registerForPushNotificationsAsync } from '../service/registerForPushNotificationsAsync';
+import { showMessage } from 'react-native-flash-message';
 
 export type User = {
   email: string;
@@ -43,7 +43,6 @@ export const AuthContext = createContext({} as AuthContextData);
 function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [userApp, setUserApp] = useState<User>({} as User);
 
-  const navigation = useNavigation<any>();
   const [loading, setLoading] = useState(false);
   const [expoToken, setExpoToken] = useState<string>('' as string);
 
@@ -53,10 +52,8 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     if (storage) {
       const userLogged = JSON.parse(storage) as User;
       setUserApp(userLogged);
-      navigation.navigate('Home');
       return;
     }
-    navigation.navigate('Login');
   }
 
   /* Chama a função de carregar as informações */
@@ -105,7 +102,10 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           await AsyncStorage.removeItem('@app:user');
         })
         .catch(error =>
-          console.log(`Falha ao sair da conta do google: ${error as string}`),
+          showMessage({
+            message: error.message,
+            type: 'warning',
+          }),
         )
         .finally(() => {
           setLoading(false);
@@ -120,19 +120,16 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         await AsyncStorage.removeItem('@app:user');
       })
       .catch(error =>
-        console.log(`Falha ao sair da conta do firebase: ${error as string}`),
+        showMessage({
+          message: error.message,
+          type: 'warning',
+        }),
       )
       .finally(() => {
         setLoading(false);
       });
 
-    await database
-      .collection('usersToken')
-      .doc(`${userApp.email}`)
-      .delete()
-      .then(() => {
-        navigation.navigate('Login');
-      });
+    await database.collection('usersToken').doc(`${userApp.email}`).delete();
   }
 
   /* Logar com o google */
@@ -159,11 +156,13 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           }
 
           void firebase.auth().signInWithCredential(credential);
-          navigation.navigate('Home');
         }
       })
       .catch(error => {
-        console.log(`Falha ao realizar login! ${error as string}`);
+        showMessage({
+          message: error.message,
+          type: 'warning',
+        });
       })
       .finally(() => {
         setLoading(false);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Yup from 'yup';
 
 import { User } from '../../contexts/auth';
 import useAuth from '../../hooks/useAuth';
@@ -13,6 +14,8 @@ import ButtonGoogle from '../ButtonGoogle';
 import ErrorMessage from '../ErrorMessage';
 
 import { Container, ImageLogo, Title } from './styles';
+import { showMessage } from 'react-native-flash-message';
+import InputPassword from '../InputPassword';
 
 interface Props {
   title: string;
@@ -61,6 +64,38 @@ export default function Form({ title, type, action }: Props) {
       });
   }
 
+  async function handleValidatingForm(type: String) {
+    try {
+      const schema = Yup.object().shape({
+        password: Yup.string()
+          .required('Senha obrigatória')
+          .min(6, 'A senha deve ter no mínimo 6 dígitos.'),
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido!'),
+      });
+      await schema.validate({ email, password });
+
+      if (type === 'register') {
+        handleRegisterSubmit();
+      } else {
+        handleLoginSubmit();
+      }
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        showMessage({
+          message: error.message,
+          type: 'warning',
+        });
+      } else {
+        showMessage({
+          message: 'Erro nas credenciais.',
+          type: 'warning',
+        });
+      }
+    }
+  }
+
   useEffect(() => {
     setError('');
   }, []);
@@ -74,24 +109,22 @@ export default function Form({ title, type, action }: Props) {
         title="E-MAIL"
         placeholder="nome@mail.com"
         onChangeText={setEmail}
+        value={email}
         keyboardType="email-address"
       />
-      <Input
+      <InputPassword
         title="SENHA"
         placeholder="********"
-        secureTextEntry
         onChangeText={setPassword}
+        value={password}
       />
       <ErrorMessage error={error} />
 
       <Button
+        disabled={!password || !email}
         title={action}
         loading={loading}
-        onPress={
-          type === 'register'
-            ? () => handleRegisterSubmit()
-            : () => handleLoginSubmit()
-        }
+        onPress={() => handleValidatingForm(type)}
       />
 
       <ButtonGoogle
