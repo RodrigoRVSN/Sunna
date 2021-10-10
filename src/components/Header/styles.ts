@@ -21,7 +21,7 @@ export const TinyLogo = styled(TouchableOpacity)`
   align-items: center;
   border-width: 2px;
   border-color: ${({theme}) => theme.colors.primaryLight};
-  background-color: ${({theme}) => theme.colors.white};
+  background-color: ${({theme}) => theme.colors.contrast};
   color: #e63946;
   font-size: 15px;
 `;
@@ -35,7 +35,7 @@ export const Title = styled.Text`
   flex: 1;
   text-align: center;
   font-size: 20px;
-  color: ${({theme}) => theme.colors.white};
+  color: ${({theme}) => theme.colors.contrast};
 `;
 
 export const LetterProfile = styled.Text`

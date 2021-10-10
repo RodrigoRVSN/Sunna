@@ -11,6 +11,6 @@ export const HomeContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: ${({theme}) => theme.colors.white};
+  color: ${({theme}) => theme.colors.contrast};
   font-size: ${RFValue(12)}px;
 `;

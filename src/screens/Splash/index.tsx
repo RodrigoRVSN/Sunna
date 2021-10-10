@@ -36,18 +36,8 @@ export function Splash() {
   });
 
   function finishAnimation() {
-    loadUserStorageData();
-    
-    if (userApp?.email) {
-      navigation.navigate('Home');
-    } else {
-      navigation.navigate('Login');
-    }
+    navigation.navigate('Login');
   }
-
-  useEffect(()=>{
-    loadUserStorageData();
-  },[userApp])
 
   useEffect(() => {
     splashAnimation.value = withTiming(50, { duration: 1000 }, () => {

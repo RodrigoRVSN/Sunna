@@ -9,7 +9,7 @@ export function Loading(): JSX.Element {
   return (
     <>
       <LoadingContainer>
-        <ActivityIndicator size="large" color={theme.colors.white} />
+        <ActivityIndicator size="large" color={theme.colors.contrast} />
       </LoadingContainer>
     </>
   );

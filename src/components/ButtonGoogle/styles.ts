@@ -21,5 +21,5 @@ export const Title = styled.Text`
   margin-left: 10px;
   flex: 1;
   font-size: ${RFValue(12)}px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
 `;

@@ -13,7 +13,7 @@ export default function AppRoutes() {
 
   return (
     <Navigator
-      initialRouteName="Splash"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         cardStyle: { opacity: 1 },
@@ -22,7 +22,6 @@ export default function AppRoutes() {
         cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
       }}>
       <Screen name="Home" component={Home} />
-      <Screen name="Splash" component={Splash} />
     </Navigator>
   );
 }

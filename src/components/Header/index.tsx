@@ -29,7 +29,7 @@ export function Header({ title }: Props): JSX.Element {
   return (
     <HeaderContainer colors={[theme.colors.primaryDark, theme.colors.background]}>
       <BorderlessButton onPress={handleGoBack}>
-        <Feather name="arrow-left" size={24} color={theme.colors.white} />
+        <Feather name="arrow-left" size={24} color={theme.colors.contrast} />
       </BorderlessButton>
       <Title>{title}</Title>
       <TinyLogo>

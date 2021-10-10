@@ -1,6 +1,6 @@
 export default {
   colors: {
-    white: '#F0E8D8',
+    contrast: '#F0E8D8',
 
     background: '#0D1321',
     

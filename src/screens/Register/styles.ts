@@ -11,13 +11,13 @@ export const HomeContainer = styled.ScrollView.attrs({
 
 export const Title = styled.Text`
   font-size: ${RFValue(20)}px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
   margin-bottom: 22px;
   margin-right: auto;
 `;
 
 export const ToLogin = styled.Text`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
   margin-top: 15px;
 `;
 

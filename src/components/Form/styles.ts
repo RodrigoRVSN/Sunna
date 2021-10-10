@@ -18,7 +18,7 @@ export const ImageLogo = styled.Image`
 
 export const Title = styled.Text`
   font-size: ${RFValue(20)}px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
   margin-bottom: 22px;
   margin-right: auto;
 `;

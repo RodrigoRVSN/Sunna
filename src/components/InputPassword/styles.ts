@@ -14,13 +14,13 @@ export const InputContainer = styled.View`
 
 export const Label = styled.Text`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
   text-align: left;
 `;
 
 export const InputText = styled(TextInput)<Props>`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.contrast};
   color: ${({ theme }) => theme.colors.background};
   padding: 0 23px;
 
@@ -36,7 +36,7 @@ export const IconContainer = styled.View<Props>`
   border-top-right-radius: 44px;
   border-bottom-right-radius: 44px;
 
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.contrast};
   align-items: center;
   justify-content: center;
 

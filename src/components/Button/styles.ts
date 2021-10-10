@@ -19,5 +19,5 @@ export const ButtonContainer = styled(RectButton)`
 
 export const Title = styled.Text`
   font-size: ${RFValue(20)}px;
-  color: ${({theme}) => theme.colors.white};
+  color: ${({theme}) => theme.colors.contrast};
 `;

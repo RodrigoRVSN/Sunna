@@ -16,7 +16,7 @@ export const InputContainer = styled.View`
 
 export const Label = styled.Text`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
   text-align: left;
 `;
 
@@ -29,7 +29,7 @@ export const InputText = styled(TextInput)<Props>`
   padding: 0 23px;
 
   font-size: 14px;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.contrast};
   color: ${({ theme }) => theme.colors.primaryDark};
   border-color: ${({ theme }) => theme.colors.primaryMedium};
   border-width: 1px;

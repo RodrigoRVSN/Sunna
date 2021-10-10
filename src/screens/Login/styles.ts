@@ -9,7 +9,7 @@ export const HomeContainer = styled.ScrollView.attrs({
 })``;
 
 export const ToRegister = styled.Text`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.contrast};
   margin-top: 15px;
 `;
 
