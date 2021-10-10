@@ -56,7 +56,7 @@ export default function InputPassword({
         />
 
         <BorderlessButton onPress={handleShowPassword}>
-          <IconContainer isFocused={isFocused}>
+          <IconContainer isFocused={isFocused || isFilled}>
             <Feather
               name={isVisible ? 'eye' : 'eye-off'}
               size={24}
