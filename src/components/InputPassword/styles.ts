@@ -27,6 +27,12 @@ export const InputText = styled(TextInput)<Props>`
   border-top-left-radius: 44px;
   border-bottom-left-radius: 44px;
 
+  ${({ isFocused, theme }) =>
+    isFocused &&
+    css`
+      border-bottom-color: ${theme.colors.primaryLight};
+      border-bottom-width: 3px;
+    `}
 `;
 
 export const IconContainer = styled.View<Props>`
@@ -40,17 +46,15 @@ export const IconContainer = styled.View<Props>`
   align-items: center;
   justify-content: center;
 
-`;
-
-export const InputContent = styled.View<Props>`
-  flex-direction: row;
-  margin-top: 6px;
-  border-radius: 44px;
-
   ${({ isFocused, theme }) =>
     isFocused &&
     css`
-      border-width: 3px;
-      border-color: ${theme.colors.primaryLight};
+      border-bottom-color: ${theme.colors.primaryLight};
+      border-bottom-width: 3px;
     `}
+`;
+
+export const InputContent = styled.View`
+  flex-direction: row;
+  margin-top: 6px;
 `;

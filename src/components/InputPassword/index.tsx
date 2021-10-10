@@ -45,14 +45,14 @@ export default function InputPassword({
     <InputContainer>
       <Label>{title}</Label>
 
-      <InputContent isFocused={isFocused || isFilled}>
+      <InputContent>
         <InputText
           {...rest}
           autoCapitalize="none"
           secureTextEntry={isVisible}
           onFocus={inputOnFocus}
           onBlur={inputOnBlur}
-          isFocused={isFocused}
+          isFocused={isFocused || isFilled}
         />
 
         <BorderlessButton onPress={handleShowPassword}>
@@ -61,7 +61,9 @@ export default function InputPassword({
               name={isVisible ? 'eye' : 'eye-off'}
               size={24}
               color={
-                isFocused || isFilled ? theme.colors.primaryLight : theme.colors.primaryDark
+                isFocused || isFilled
+                  ? theme.colors.primaryLight
+                  : theme.colors.primaryDark
               }
             />
           </IconContainer>

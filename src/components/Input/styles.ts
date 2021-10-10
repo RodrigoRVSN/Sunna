@@ -37,7 +37,7 @@ export const InputText = styled(TextInput)<Props>`
   ${({ isFocused, theme }) =>
     isFocused &&
     css`
-      border-width: 3px;
-      border-color: ${theme.colors.primaryLight};
+      border-bottom-color: ${theme.colors.primaryLight};
+      border-bottom-width: 3px;
     `}
 `;
