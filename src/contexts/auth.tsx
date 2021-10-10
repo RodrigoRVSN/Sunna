@@ -62,6 +62,8 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   /* Chama a função de carregar as informações */
   useEffect(() => {
     void loadUserStorageData();
+
+    return () => setLoading(false);
   }, []);
 
   /* Notificações */

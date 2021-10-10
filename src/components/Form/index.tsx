@@ -97,7 +97,15 @@ export default function Form({ title, type, action }: Props) {
   }
 
   useEffect(() => {
-    setError('');
+    let isMounted = true;
+
+    if (isMounted) {
+      setError('');
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
