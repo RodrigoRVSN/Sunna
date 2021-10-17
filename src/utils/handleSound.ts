@@ -4,7 +4,7 @@ import { Audio, AVPlaybackNativeSource } from 'expo-av';
 const sound = new Audio.Sound();
 
 type Props = {
-  setPlaying: Dispatch<SetStateAction<boolean>>;
+  setPlaying: Dispatch<SetStateAction<string>>;
   actionState: boolean;
   setActionState: Dispatch<SetStateAction<boolean>>;
   audioOn: AVPlaybackNativeSource;
@@ -18,7 +18,6 @@ export async function handleSound({
   audioOn,
   audioOff,
 }: Props): Promise<() => void> {
-  setPlaying(true);
   setActionState(!actionState);
   try {
     await sound.loadAsync(actionState ? audioOn : audioOff);
@@ -28,7 +27,7 @@ export async function handleSound({
   }
   const interval = setTimeout(async () => {
     await sound.unloadAsync();
-    setPlaying(false);
+    setPlaying('');
   }, 3000);
 
   return () => clearInterval(interval);

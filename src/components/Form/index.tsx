@@ -40,7 +40,6 @@ export default function Form({ title, type, action }: Props) {
         const { user } = userCredential;
         await AsyncStorage.setItem('@app:user', JSON.stringify(user));
         setUserApp(user as User);
-        navigation.navigate('Home');
       })
       .catch(err => {
         setError((err as Error).message);
