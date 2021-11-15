@@ -1,18 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { dbRealTime } from '../config/firebase';
 
-
-interface RoomsProps {
-  id: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
-  actuator: {
-    local: string;
-    value: boolean
+export interface RoomsProps {
+  id: string;
+  local: string;
+  value: {
+    state: boolean;
   };
 }
 
 type UseDatabaseProps = {
   firebasePost: (
-    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
+    convenient: string,
     thing: string,
     isBoolean?: boolean,
   ) => void;
@@ -20,6 +19,8 @@ type UseDatabaseProps = {
   loadingData: boolean;
   actionState: boolean;
   rooms: RoomsProps[] | undefined;
+  typePage: string;
+  setTypePage: Dispatch<SetStateAction<string>>;
 };
 
 export function useDatabase(): UseDatabaseProps {
@@ -27,23 +28,21 @@ export function useDatabase(): UseDatabaseProps {
   const [actionState, setActionState] = useState(false);
   const [playing, setPlaying] = useState('');
   const [loadingData, setLoadingData] = useState(true);
+  const [typePage, setTypePage] = useState('luzes');
   const [rooms, setRooms] = useState<RoomsProps[]>();
 
   // send data to database
   async function firebasePost(
-    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
+    convenient: string,
     thing: string,
     isBoolean?: boolean,
   ) {
     if (isBoolean) {
-
-      // TODO: Alterar estado booleano
-
       setPlaying(convenient);
-      const value = await dbRealTime.ref(`${convenient}/${thing}`).get();
+      const value = await dbRealTime.ref(`${convenient}/${thing}/state`).get();
 
       await dbRealTime
-        .ref(`${convenient}/${thing}`)
+        .ref(`${convenient}/${thing}/state`)
         .set(!value.val())
         .then(() => {
           setActionState(valueSend);
@@ -52,34 +51,40 @@ export function useDatabase(): UseDatabaseProps {
     }
   }
 
+  function loadData(isMounted: boolean, typePage: string) {
+    const roomRef = dbRealTime.ref(typePage);
+    roomRef.on('value', room => {
+      const databaseValue: RoomsProps = room.val();
+      const values = Object.entries(databaseValue).map(([key, value]) => {
+        return {
+          local: key,
+          value: value as boolean,
+        };
+      });
+      if (isMounted) {
+        setRooms(values as unknown as RoomsProps[]);
+        setLoadingData(false);
+      }
+    });
+  }
+
   useEffect(() => {
     let isMounted = true;
-    async function loadData() {
-      const roomRef = dbRealTime.ref('/luzes');
-      roomRef.on('value', room => {
-        const databaseValue: RoomsProps = room.val();
-        // TODO: Corrigir duplicata
-        const values = Object.entries(databaseValue).map(([key, value]) => {
-          return {
-            id: key,
-            actuator: {
-              local: Object.keys(value),
-              value: Object.values(value).map(item => item.state),
-            },
-          };
-        });
-        if (isMounted) {
-          setRooms(values as unknown as RoomsProps[]);
-          setLoadingData(false);
-        }
-      });
-    }
-    loadData();
+
+    loadData(isMounted, typePage);
 
     return () => {
       isMounted = false;
     };
-  }, [playing]);
+  }, [playing, typePage]);
 
-  return { firebasePost, playing, loadingData, actionState, rooms };
+  return {
+    firebasePost,
+    playing,
+    loadingData,
+    actionState,
+    rooms,
+    typePage,
+    setTypePage,
+  };
 }

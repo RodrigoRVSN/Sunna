@@ -1,12 +1,50 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { BackHandler, FlatList } from 'react-native';
+
+import { useDatabase } from '../../hooks/useDatabase';
+
 import Background from '../../components/Background';
+import BackAction from '../../components/BackAction';
 import { Header } from '../../components/Header';
 
-export function Sensors(): JSX.Element {
+import { HomeContainer } from './styles';
+import { LoadingAnimated } from '../../components/LoadingAnimated';
+import { RoomItem } from '../../components/RoomItem';
+
+export default function Sensors(): JSX.Element {
+  const { backAction } = BackAction();
+
+  const { loadingData, rooms, typePage, setTypePage } = useDatabase();
+
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      setTypePage('sensores');
+    }
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
+      isMounted = false;
+    };
+  }, [backAction, setTypePage]);
+
   return (
     <Background>
-      <Header title="Sensores" />
+      <Header title={typePage} />
+      {loadingData ? (
+        <LoadingAnimated />
+      ) : (
+        <HomeContainer>
+          <FlatList
+            data={rooms}
+            keyExtractor={item => item.local}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <RoomItem key={item.id} item={item} page={typePage} />
+            )}
+          />
+        </HomeContainer>
+      )}
     </Background>
   );
 }

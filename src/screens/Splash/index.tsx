@@ -1,5 +1,5 @@
-import { useFocusEffect, useNavigation } from '@react-navigation/core';
-import React, { useEffect, useCallback } from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useEffect } from 'react';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -10,13 +10,11 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import BrandSvg from '../../assets/images/brand.svg';
-import useAuth from '../../hooks/useAuth';
 
 import { Container } from './styles';
 
-export function Splash() {
+export function Splash(): JSX.Element {
   const splashAnimation = useSharedValue(0);
-  const { loadUserStorageData, userApp } = useAuth();
   const navigation = useNavigation<any>();
 
   const brandStyle = useAnimatedStyle(() => {

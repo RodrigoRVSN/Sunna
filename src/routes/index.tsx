@@ -7,7 +7,7 @@ import useAuth from '../hooks/useAuth';
 import AuthRoutes from './auth.routes';
 import { LoadingAnimated } from '../components/LoadingAnimated';
 
-export default function Routes() {
+export default function Routes(): JSX.Element {
   const { userApp, loading } = useAuth();
 
   const theme = {

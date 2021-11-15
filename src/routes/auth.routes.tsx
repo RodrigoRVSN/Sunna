@@ -10,8 +10,7 @@ import { Splash } from '../screens/Splash';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function AuthRoutes() {
-
+export default function AuthRoutes(): JSX.Element {
   return (
     <Navigator
       initialRouteName="Splash"

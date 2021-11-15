@@ -20,7 +20,7 @@ export const Label = styled.Text`
   text-align: left;
 `;
 
-export const InputText = styled(TextInput)<Props>`
+export const InputText = styled(TextInput) <Props>`
   width: ${windowWidth * 0.75}px;
   height: 60px;
   border-radius: 44px;

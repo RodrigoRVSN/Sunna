@@ -9,7 +9,7 @@ import {
   ImageProfile,
   LetterProfile,
   TinyLogo,
-  Title
+  Title,
 } from './styles';
 
 type Props = {
@@ -20,18 +20,19 @@ export function Header({ title }: Props): JSX.Element {
   const theme = useTheme();
   const { userApp, handleSignOut } = useAuth();
 
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<unknown>();
 
   function handleGoBack() {
     navigation.goBack();
   }
 
   return (
-    <HeaderContainer colors={[theme.colors.primaryDark, theme.colors.background]}>
+    <HeaderContainer
+      colors={[theme.colors.primaryDark, theme.colors.background]}>
       <BorderlessButton onPress={handleGoBack}>
         <Feather name="arrow-left" size={24} color={theme.colors.contrast} />
       </BorderlessButton>
-      <Title>{title}</Title>
+      <Title>{title.charAt(0).toUpperCase() + title.substr(1)}</Title>
       <TinyLogo onPress={() => handleSignOut()}>
         {userApp?.photoUrl ? (
           <ImageProfile source={{ uri: userApp?.photoUrl }} />
