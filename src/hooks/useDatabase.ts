@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
-import { database, dbRealTime } from '../config/firebase';
+import { dbRealTime } from '../config/firebase';
 
 interface Convenient {
-  convenient: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala';
+  convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
 }
 
 interface RoomsProps {
-  id: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala';
-  value: {
-    state: boolean;
-  };
+  id: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
+  value: unknown;
 }
 
 type UseDatabaseProps = {
   firebasePost: (
-    convenient: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala',
+    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
     thing: string,
     isBoolean?: boolean,
   ) => void;
@@ -33,7 +31,7 @@ export function useDatabase(): UseDatabaseProps {
 
   // send data to database
   async function firebasePost(
-    convenient: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala',
+    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
     thing: string,
     isBoolean?: boolean,
   ) {
@@ -55,17 +53,14 @@ export function useDatabase(): UseDatabaseProps {
     let isMounted = true;
     async function loadData() {
       const roomRef = dbRealTime.ref();
+
       roomRef.on('value', room => {
         const databaseValue: RoomsProps = room.val();
-        console.log(databaseValue);
+
         const values = Object.entries(databaseValue).map(([key, value]) => {
-          console.log('a', key);
           return {
-            id: Object.keys(databaseValue),
-            value: {
-              local: Object.keys(value),
-              state: value.lamp,
-            },
+            id: key,
+            value: value.lamp,
           };
         });
         if (isMounted) {
@@ -79,7 +74,7 @@ export function useDatabase(): UseDatabaseProps {
     return () => {
       isMounted = false;
     };
-  });
+  }, [playing]);
 
   return { firebasePost, playing, loadingData, actionState, rooms };
 }

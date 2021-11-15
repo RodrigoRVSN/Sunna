@@ -3,18 +3,16 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import Register from '../screens/Register';
-import Login from '../screens/Login';
 
-import { Splash } from '../screens/Splash';
+import Home from '../screens/Home';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export default function AuthRoutes() {
+export default function AppRoutes() {
 
   return (
     <Navigator
-      initialRouteName="Splash"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         cardStyle: { opacity: 1 },
@@ -22,9 +20,7 @@ export default function AuthRoutes() {
         gestureDirection: 'vertical',
         cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
       }}>
-      <Screen name="Splash" component={Splash} />
-      <Screen name="Login" component={Login} />
-      <Screen name="Register" component={Register} />
+      <Screen name="Home" component={Home} />
     </Navigator>
   );
 }

@@ -2,12 +2,12 @@ import React from 'react';
 
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 
+import AppRoutes from './app.routes';
 import useAuth from '../hooks/useAuth';
 import AuthRoutes from './auth.routes';
 import { LoadingAnimated } from '../components/LoadingAnimated';
-import AppTabRoutes from './app.tab.routes';
 
-export default function Routes(): JSX.Element {
+export default function Routes() {
   const { userApp, loading } = useAuth();
 
   const theme = {
@@ -22,7 +22,7 @@ export default function Routes(): JSX.Element {
     <LoadingAnimated />
   ) : (
     <NavigationContainer independent theme={theme}>
-      {userApp.email ? <AppTabRoutes /> : <AuthRoutes />}
+      {userApp.email ? <AppRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 }

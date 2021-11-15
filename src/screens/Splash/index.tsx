@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/core';
+import { useFocusEffect, useNavigation } from '@react-navigation/core';
 import React, { useEffect, useCallback } from 'react';
 import Animated, {
   Extrapolate,
@@ -10,12 +10,14 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import BrandSvg from '../../assets/images/brand.svg';
+import useAuth from '../../hooks/useAuth';
 
 import { Container } from './styles';
 
-export function Splash(): JSX.Element {
+export function Splash() {
   const splashAnimation = useSharedValue(0);
-  const navigation = useNavigation();
+  const { loadUserStorageData, userApp } = useAuth();
+  const navigation = useNavigation<any>();
 
   const brandStyle = useAnimatedStyle(() => {
     return {
@@ -33,16 +35,16 @@ export function Splash(): JSX.Element {
     };
   });
 
-  const finishAnimation = useCallback(() => {
+  function finishAnimation() {
     navigation.navigate('Login');
-  }, [navigation]);
+  }
 
   useEffect(() => {
     splashAnimation.value = withTiming(50, { duration: 1000 }, () => {
       'worklet';
       runOnJS(finishAnimation)();
     });
-  }, [finishAnimation, splashAnimation]);
+  }, []);
 
   return (
     <Container>
