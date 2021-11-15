@@ -53,7 +53,7 @@ export function useDatabase(): UseDatabaseProps {
 
   useEffect(() => {
     let isMounted = true;
-    function loadData() {
+    async function loadData() {
       const roomRef = dbRealTime.ref();
       roomRef.on('value', room => {
         const databaseValue: RoomsProps = room.val();
@@ -74,7 +74,7 @@ export function useDatabase(): UseDatabaseProps {
         }
       });
     }
-    void loadData();
+    loadData();
 
     return () => {
       isMounted = false;

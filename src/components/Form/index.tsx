@@ -63,7 +63,7 @@ export default function Form({ title, type, action }: Props) {
       });
   }
 
-  async function handleValidatingForm(type: String) {
+  async function handleValidatingForm(type: string) {
     try {
       const schema = Yup.object().shape({
         password: Yup.string()
