@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
-import { dbRealTime } from '../config/firebase';
+import { database, dbRealTime } from '../config/firebase';
 
 interface Convenient {
-  convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
+  convenient: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala';
 }
 
 interface RoomsProps {
-  id: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
-  value: unknown;
+  id: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala';
+  value: {
+    state: boolean;
+  };
 }
 
 type UseDatabaseProps = {
   firebasePost: (
-    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
+    convenient: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala',
     thing: string,
     isBoolean?: boolean,
   ) => void;
@@ -31,7 +33,7 @@ export function useDatabase(): UseDatabaseProps {
 
   // send data to database
   async function firebasePost(
-    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
+    convenient: 'banheiro' | 'quarto' | 'garagem' | 'cozinha' | 'sala',
     thing: string,
     isBoolean?: boolean,
   ) {
@@ -51,16 +53,19 @@ export function useDatabase(): UseDatabaseProps {
 
   useEffect(() => {
     let isMounted = true;
-    async function loadData() {
+    function loadData() {
       const roomRef = dbRealTime.ref();
-
       roomRef.on('value', room => {
         const databaseValue: RoomsProps = room.val();
-
+        console.log(databaseValue);
         const values = Object.entries(databaseValue).map(([key, value]) => {
+          console.log('a', key);
           return {
-            id: key,
-            value: value.lamp,
+            id: Object.keys(databaseValue),
+            value: {
+              local: Object.keys(value),
+              state: value.lamp,
+            },
           };
         });
         if (isMounted) {
@@ -69,12 +74,12 @@ export function useDatabase(): UseDatabaseProps {
         }
       });
     }
-    loadData();
+    void loadData();
 
     return () => {
       isMounted = false;
     };
-  }, [playing]);
+  });
 
   return { firebasePost, playing, loadingData, actionState, rooms };
 }
