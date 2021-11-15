@@ -18,7 +18,7 @@ type Props = {
 
 export function Header({ title }: Props): JSX.Element {
   const theme = useTheme();
-  const { userApp } = useAuth();
+  const { userApp, handleSignOut } = useAuth();
 
   const navigation = useNavigation<any>();
 
@@ -32,7 +32,7 @@ export function Header({ title }: Props): JSX.Element {
         <Feather name="arrow-left" size={24} color={theme.colors.contrast} />
       </BorderlessButton>
       <Title>{title}</Title>
-      <TinyLogo>
+      <TinyLogo onPress={() => handleSignOut()}>
         {userApp?.photoUrl ? (
           <ImageProfile source={{ uri: userApp?.photoUrl }} />
         ) : (

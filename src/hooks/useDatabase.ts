@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { dbRealTime } from '../config/firebase';
 
-interface Convenient {
-  convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
-}
 
 interface RoomsProps {
   id: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
-  value: unknown;
+  actuator: {
+    local: string;
+    value: boolean
+  };
 }
 
 type UseDatabaseProps = {
@@ -36,6 +36,9 @@ export function useDatabase(): UseDatabaseProps {
     isBoolean?: boolean,
   ) {
     if (isBoolean) {
+
+      // TODO: Alterar estado booleano
+
       setPlaying(convenient);
       const value = await dbRealTime.ref(`${convenient}/${thing}`).get();
 
@@ -52,15 +55,17 @@ export function useDatabase(): UseDatabaseProps {
   useEffect(() => {
     let isMounted = true;
     async function loadData() {
-      const roomRef = dbRealTime.ref();
-
+      const roomRef = dbRealTime.ref('/luzes');
       roomRef.on('value', room => {
         const databaseValue: RoomsProps = room.val();
-
+        // TODO: Corrigir duplicata
         const values = Object.entries(databaseValue).map(([key, value]) => {
           return {
             id: key,
-            value: value.lamp,
+            actuator: {
+              local: Object.keys(value),
+              value: Object.values(value).map(item => item.state),
+            },
           };
         });
         if (isMounted) {
