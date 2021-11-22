@@ -6,8 +6,15 @@ import Sensors from '../screens/Sensors';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { Platform } from 'react-native';
+import Lights from '../screens/Lights';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  Lights: undefined;
+  Sensors: undefined;
+};
+
+const { Navigator, Screen } = createBottomTabNavigator<RootStackParamList>();
 
 export default function AppTabRoutes(): JSX.Element {
   const { colors } = useTheme();
@@ -31,6 +38,15 @@ export default function AppTabRoutes(): JSX.Element {
         <Screen
           name="Home"
           component={Home}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Entypo size={24} name="home" color={color} />
+            ),
+          }}
+        />
+        <Screen
+          name="Lights"
+          component={Lights}
           options={{
             tabBarIcon: ({ color }) => (
               <Entypo size={24} name="light-bulb" color={color} />

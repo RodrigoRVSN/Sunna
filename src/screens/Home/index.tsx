@@ -1,50 +1,26 @@
 import React, { useEffect } from 'react';
-import { BackHandler, FlatList } from 'react-native';
-
-import { useDatabase } from '../../hooks/useDatabase';
+import { BackHandler } from 'react-native';
 
 import Background from '../../components/Background';
 import BackAction from '../../components/BackAction';
 import { Header } from '../../components/Header';
-
-import { HomeContainer } from './styles';
-import { LoadingAnimated } from '../../components/LoadingAnimated';
-import { RoomItem } from '../../components/RoomItem';
+import { HomeSelect } from '../../components/HomeSelect';
 
 export default function Home(): JSX.Element {
   const { backAction } = BackAction();
 
-  const { loadingData, rooms, setTypePage, typePage } = useDatabase();
-
   useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
-      setTypePage('luzes');
-    }
     BackHandler.addEventListener('hardwareBackPress', backAction);
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', backAction);
-      isMounted = false;
     };
-  }, [backAction, setTypePage]);
+  }, [backAction]);
 
   return (
     <Background>
-      <Header title={typePage} />
-      {loadingData ? (
-        <LoadingAnimated />
-      ) : (
-        <HomeContainer>
-          <FlatList
-            data={rooms}
-            keyExtractor={item => item.local}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <RoomItem key={item.id} item={item} page={typePage} />
-            )}
-          />
-        </HomeContainer>
-      )}
+      <Header title={'Início'} />
+      <HomeSelect iconName="motion-sensor" redirect="Lights" title="Luzes" />
+      <HomeSelect iconName="lightbulb" redirect="Sensors" title="Sensores" />
     </Background>
   );
 }
