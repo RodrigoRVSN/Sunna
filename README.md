@@ -4,13 +4,13 @@ This application is intended to use an Api, through which it will read and write
 
 ## 🛠 Workspace
 
-# /src
-- <b>conection.py is the network connection setup.</b>
-- <b>firebase-esp.py is the application manager that controls what is running on the esp32.</b>
-- <b>house-esp.py that's controll the house and read data from cloud.</b>
-- <b>startup.py is the Esp32 boot.</b>
-- <b>ufirebase is the Firebase class that allows request/response from the cloud.</b>
-- <b>usseclient provides a generator of SSE received through an existing HTTP response.</b>
+<b>/src<b>
+- conection.py is the network connection setup.
+- firebase-esp.py is the application manager that controls what is running on the esp32.>
+- house-esp.py that's controll the house and read data from cloud.
+- startup.py is the Esp32 boot.
+- ufirebase is the Firebase class that allows request/response from the cloud.
+- usseclient provides a generator of SSE received through an existing HTTP response.
 
 ## 📫 Contribuiting with Sunna
 
