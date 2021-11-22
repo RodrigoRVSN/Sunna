@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { BackHandler, FlatList } from 'react-native';
 
 import { useDatabase } from '../../hooks/useDatabase';
@@ -10,23 +10,26 @@ import { Header } from '../../components/Header';
 import { HomeContainer } from './styles';
 import { LoadingAnimated } from '../../components/LoadingAnimated';
 import { SensorItem } from '../../components/SensorItem';
+import { useFocusEffect } from '@react-navigation/core';
 
 export default function Sensors(): JSX.Element {
   const { backAction } = BackAction();
 
   const { loadingData, rooms, typePage, setTypePage } = useDatabase();
 
-  useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
-      setTypePage('sensores');
-    }
-    BackHandler.addEventListener('hardwareBackPress', backAction);
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', backAction);
-      isMounted = false;
-    };
-  }, [backAction, setTypePage]);
+  useFocusEffect(
+    useCallback(() => {
+      let isMounted = true;
+      if (isMounted) {
+        setTypePage('sensores');
+      }
+      BackHandler.addEventListener('hardwareBackPress', backAction);
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', backAction);
+        isMounted = false;
+      };
+    }, [backAction, setTypePage]),
+  );
 
   return (
     <Background>

@@ -1,5 +1,6 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction, useCallback } from 'react';
 import { dbRealTime } from '../config/firebase';
+import { useFocusEffect } from '@react-navigation/core';
 
 export interface RoomsProps {
   id: string;
@@ -68,15 +69,17 @@ export function useDatabase(): UseDatabaseProps {
     });
   }
 
-  useEffect(() => {
-    let isMounted = true;
+  useFocusEffect(
+    useCallback(() => {
+      let isMounted = true;
 
-    loadData(isMounted, typePage);
+      loadData(isMounted, typePage);
 
-    return () => {
-      isMounted = false;
-    };
-  }, [playing, typePage]);
+      return () => {
+        isMounted = false;
+      };
+    }, [typePage]),
+  );
 
   return {
     firebasePost,
