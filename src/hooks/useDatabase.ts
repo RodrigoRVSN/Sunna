@@ -54,7 +54,7 @@ export function useDatabase(): UseDatabaseProps {
   function loadData(isMounted: boolean, typePage: string) {
     const roomRef = dbRealTime.ref(typePage);
     roomRef.on('value', room => {
-      const databaseValue: RoomsProps = room.val();
+      const databaseValue: RoomsProps = room.val() as RoomsProps;
       const values = Object.entries(databaseValue).map(([key, value]) => {
         return {
           local: key,

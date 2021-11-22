@@ -9,7 +9,7 @@ import { Header } from '../../components/Header';
 
 import { HomeContainer } from './styles';
 import { LoadingAnimated } from '../../components/LoadingAnimated';
-import { RoomItem } from '../../components/RoomItem';
+import { SensorItem } from '../../components/SensorItem';
 
 export default function Sensors(): JSX.Element {
   const { backAction } = BackAction();
@@ -39,9 +39,7 @@ export default function Sensors(): JSX.Element {
             data={rooms}
             keyExtractor={item => item.local}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <RoomItem key={item.id} item={item} page={typePage} />
-            )}
+            renderItem={({ item }) => <SensorItem key={item.id} item={item} />}
           />
         </HomeContainer>
       )}
