@@ -106,7 +106,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           setUserApp({} as User);
           await AsyncStorage.removeItem('@app:user');
         })
-        .catch(error =>
+        .catch((error: Error) =>
           showMessage({
             message: error.message,
             type: 'warning',
@@ -124,7 +124,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         setUserApp({} as User);
         await AsyncStorage.removeItem('@app:user');
       })
-      .catch(error =>
+      .catch((error: Error) =>
         showMessage({
           message: error.message,
           type: 'warning',
@@ -163,7 +163,7 @@ function AuthProvider({ children }: AuthProviderProps): JSX.Element {
           void firebase.auth().signInWithCredential(credential);
         }
       })
-      .catch(error => {
+      .catch((error: Error) => {
         showMessage({
           message: error.message,
           type: 'warning',

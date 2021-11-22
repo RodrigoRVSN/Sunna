@@ -18,7 +18,7 @@ export const Label = styled.Text`
   text-align: left;
 `;
 
-export const InputText = styled(TextInput)<Props>`
+export const InputText = styled(TextInput) <Props>`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.contrast};
   color: ${({ theme }) => theme.colors.background};

@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, Dispatch, SetStateAction, useCallback } from 'react';
 import { dbRealTime } from '../config/firebase';
+import { useFocusEffect } from '@react-navigation/core';
 
-interface Convenient {
-  convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
-}
-
-interface RoomsProps {
-  id: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom';
-  value: unknown;
+export interface RoomsProps {
+  id: string;
+  local: string;
+  value: {
+    state: boolean;
+  };
 }
 
 type UseDatabaseProps = {
   firebasePost: (
-    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
+    convenient: string,
     thing: string,
     isBoolean?: boolean,
   ) => void;
@@ -20,6 +20,8 @@ type UseDatabaseProps = {
   loadingData: boolean;
   actionState: boolean;
   rooms: RoomsProps[] | undefined;
+  typePage: string;
+  setTypePage: Dispatch<SetStateAction<string>>;
 };
 
 export function useDatabase(): UseDatabaseProps {
@@ -27,20 +29,21 @@ export function useDatabase(): UseDatabaseProps {
   const [actionState, setActionState] = useState(false);
   const [playing, setPlaying] = useState('');
   const [loadingData, setLoadingData] = useState(true);
+  const [typePage, setTypePage] = useState('luzes');
   const [rooms, setRooms] = useState<RoomsProps[]>();
 
   // send data to database
   async function firebasePost(
-    convenient: 'bathRoom' | 'coupleRoom' | 'garage' | 'kitchen' | 'livingRoom',
+    convenient: string,
     thing: string,
     isBoolean?: boolean,
   ) {
     if (isBoolean) {
       setPlaying(convenient);
-      const value = await dbRealTime.ref(`${convenient}/${thing}`).get();
+      const value = await dbRealTime.ref(`${convenient}/${thing}/state`).get();
 
       await dbRealTime
-        .ref(`${convenient}/${thing}`)
+        .ref(`${convenient}/${thing}/state`)
         .set(!value.val())
         .then(() => {
           setActionState(valueSend);
@@ -49,32 +52,42 @@ export function useDatabase(): UseDatabaseProps {
     }
   }
 
-  useEffect(() => {
-    let isMounted = true;
-    async function loadData() {
-      const roomRef = dbRealTime.ref();
-
-      roomRef.on('value', room => {
-        const databaseValue: RoomsProps = room.val();
-
-        const values = Object.entries(databaseValue).map(([key, value]) => {
-          return {
-            id: key,
-            value: value.lamp,
-          };
-        });
-        if (isMounted) {
-          setRooms(values as unknown as RoomsProps[]);
-          setLoadingData(false);
-        }
+  function loadData(isMounted: boolean, typePage: string) {
+    const roomRef = dbRealTime.ref(typePage);
+    roomRef.on('value', room => {
+      const databaseValue: RoomsProps = room.val() as RoomsProps;
+      const values = Object.entries(databaseValue).map(([key, value]) => {
+        return {
+          local: key,
+          value: value as boolean,
+        };
       });
-    }
-    loadData();
+      if (isMounted) {
+        setRooms(values as unknown as RoomsProps[]);
+        setLoadingData(false);
+      }
+    });
+  }
 
-    return () => {
-      isMounted = false;
-    };
-  }, [playing]);
+  useFocusEffect(
+    useCallback(() => {
+      let isMounted = true;
 
-  return { firebasePost, playing, loadingData, actionState, rooms };
+      loadData(isMounted, typePage);
+
+      return () => {
+        isMounted = false;
+      };
+    }, [typePage]),
+  );
+
+  return {
+    firebasePost,
+    playing,
+    loadingData,
+    actionState,
+    rooms,
+    typePage,
+    setTypePage,
+  };
 }
