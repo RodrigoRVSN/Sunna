@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import Animated, {
   Extrapolate,
@@ -10,12 +11,15 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import BrandSvg from '../../assets/images/brand.svg';
+import { RootStackParamList } from '../../routes/auth.routes';
 
 import { Container } from './styles';
 
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Login'>;
+
 export function Splash(): JSX.Element {
   const splashAnimation = useSharedValue(0);
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<homeScreenProp>();
 
   const brandStyle = useAnimatedStyle(() => {
     return {

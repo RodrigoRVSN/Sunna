@@ -4,10 +4,10 @@ import React from 'react';
 import { KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Background from '../../components/Background';
 import Form from '../../components/Form';
-import { RootStackParamList } from '../../routes/app.routes';
+import { RootStackParamList } from '../../routes/auth.routes';
 import { HomeContainer, styles, ToRegister } from './styles';
 
-type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 export default function Login(): JSX.Element {
   const navigation = useNavigation<homeScreenProp>();

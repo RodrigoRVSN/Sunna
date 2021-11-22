@@ -8,13 +8,13 @@ import { useTheme } from 'styled-components';
 import { Platform } from 'react-native';
 import Lights from '../screens/Lights';
 
-export type RootStackParamList = {
+export type RootTabParamList = {
   Home: undefined;
   Lights: undefined;
   Sensors: undefined;
 };
 
-const { Navigator, Screen } = createBottomTabNavigator<RootStackParamList>();
+const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
 
 export default function AppTabRoutes(): JSX.Element {
   const { colors } = useTheme();

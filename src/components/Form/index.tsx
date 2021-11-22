@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
 
@@ -16,6 +17,8 @@ import ErrorMessage from '../ErrorMessage';
 import { Container, ImageLogo, Title } from './styles';
 import { showMessage } from 'react-native-flash-message';
 import InputPassword from '../InputPassword';
+import { RootStackParamList } from '../../routes/auth.routes';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface Props {
   title: string;
@@ -23,13 +26,15 @@ interface Props {
   action: string;
 }
 
-export default function Form({ title, type, action }: Props) {
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Login'>;
+
+export default function Form({ title, type, action }: Props): JSX.Element {
   const { setUserApp, handleGoogleSignIn, loading, setLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<homeScreenProp>();
 
   async function handleLoginSubmit() {
     setLoading(true);
@@ -76,9 +81,9 @@ export default function Form({ title, type, action }: Props) {
       await schema.validate({ email, password });
 
       if (type === 'register') {
-        handleRegisterSubmit();
+        void handleRegisterSubmit();
       } else {
-        handleLoginSubmit();
+        void handleLoginSubmit();
       }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {

@@ -4,10 +4,13 @@ import { KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Background from '../../components/Background';
 import { HomeContainer, ToLogin, styles } from './styles';
 import Form from '../../components/Form';
-import { RootStackParamList } from '../../routes/app.routes';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/auth.routes';
+
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 export default function Register(): JSX.Element {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<homeScreenProp>();
 
   return (
     <KeyboardAvoidingView

@@ -4,15 +4,15 @@ import { useNavigation } from '@react-navigation/core';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../routes/app.routes';
+import { RootTabParamList } from '../../routes/app.routes';
 
 export interface IRoomItemProps {
-  redirect: keyof RootStackParamList;
+  redirect: keyof RootTabParamList;
   title: string;
   iconName: React.ComponentProps<typeof MaterialCommunityIcons>['name'];
 }
 
-type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type homeScreenProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
 export function HomeSelect({
   redirect,

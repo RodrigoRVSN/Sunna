@@ -8,7 +8,13 @@ import Login from '../screens/Login';
 
 import { Splash } from '../screens/Splash';
 
-const { Navigator, Screen } = createStackNavigator();
+export type RootStackParamList = {
+  Splash: undefined;
+  Login: undefined;
+  Register: undefined;
+};
+
+const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 export default function AuthRoutes(): JSX.Element {
   return (
